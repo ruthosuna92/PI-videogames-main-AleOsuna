@@ -2,6 +2,7 @@ const { Router } = require('express');
 const getVideogames = require('../controllers/getVideogames')
 const getVideogameById = require('../controllers/getVideogameById')
 const getVideogameByName = require('../controllers/getVideogameByName')
+const postVideogame = require('../controllers/postVideogame')
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 const videogamesRoutes = Router();
@@ -49,9 +50,18 @@ videogamesRoutes.get('/:idVideogame', async (req, res)=>{
     }
 })
 
-videogamesRoutes.post('/', (req, res) => {
-    const {name, image, genres, description, platforms} = req.body
-    res.status(200).json({name, image, genres, description, platforms})
+videogamesRoutes.post('/', async (req, res) => {
+    try {
+        const {name, background_image, genres, description, platforms, rating, released} = req.body
+        if(!name || !background_image || !genres || !description || !platforms || !rating || !released){
+            res.status(404).send('Ingresar los datos completos')
+        } else {
+            const resp = await postVideogame(name, background_image, genres, description, platforms, rating, released)
+            res.status(200).json(resp)
+        }        
+    } catch (error) {
+        res.status(500).json(error.message)
+    }
 })
 
 // Configurar los routers

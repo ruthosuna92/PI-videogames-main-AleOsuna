@@ -19,10 +19,21 @@
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
+require('dotenv').config()
+const {API_KEY} = process.env
+const { Genre} = require('./src/db.js')
+const axios = require('axios')
+
 
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
-  server.listen(3002, () => {
+  server.listen(3002, async () => {
+    try {
+      const {results} = (await axios(`https://api.rawg.io/api/genres?key=${API_KEY}`)).data
+      Genre.bulkCreate(results)
+    } catch (error) {
+      console.log(error);
+    }
     console.log('%s listening at 3002'); // eslint-disable-line no-console
   });
 });
