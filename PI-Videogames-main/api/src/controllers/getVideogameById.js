@@ -10,8 +10,8 @@ module.exports = async (idVideogame) => {
     try {
         if (isNaN(Number(idVideogame))) {
             const videogameDetailBD  = await Videogame.findOne({
-                where: {idVideogame},
-                include: { model: Genre, as: 'Genres' }
+                where: {id: idVideogame},
+                include: { model: Genre, as: 'genres' }
             });
             return videogameDetailBD;
         } else {

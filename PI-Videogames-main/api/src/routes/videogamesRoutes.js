@@ -30,7 +30,8 @@ videogamesRoutes.get('/', async (req, res)=>{
             return res.status(200).json(resp)
         } else {    
             const resp = await getVideogameByName(name)
-            res.status(200).json(resp)}
+            res.status(200).json(resp)
+        }
         
     } catch (error) {
         res.status(500).send(error.message);
