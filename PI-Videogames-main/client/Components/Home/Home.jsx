@@ -1,7 +1,18 @@
 import Cards from "../Cards/Cards"
+import { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+
+import { getAllGames } from "../../Redux/actions"
 
 
 const Home = () => {
+    const allVideogames = useSelector((state)=>state.allVideogames)
+    console.log(allVideogames);
+    const dispatch = useDispatch()
+
+      useEffect(()=>{
+            dispatch(getAllGames())
+      }, [])
 
     const videogames = [{
         id: 908462,
@@ -43,7 +54,7 @@ const Home = () => {
                 <option value='Api'>Api</option>
                 <option value='Database'>Database</option>
             </select>
-            <Cards videogames={videogames}/>
+            <Cards videogames={allVideogames}/>
             
         </div>
     )

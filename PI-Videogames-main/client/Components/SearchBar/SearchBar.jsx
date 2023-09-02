@@ -13,6 +13,7 @@ const SearchBar = () => {
         
     }
     const handleClick = () => {
+        
         setBusqueda({
             name: ''
         })
@@ -21,7 +22,7 @@ const SearchBar = () => {
     return (
         <div>
             <input type='text' value={busqueda.name} onChange={handleChange}></input>
-            <button onClick={handleClick}><NavLink to={`/search?name=${busqueda.name}`}>Search</NavLink></button>
+            <button onClick={handleClick}>Search</button>
         </div>
     )
 }

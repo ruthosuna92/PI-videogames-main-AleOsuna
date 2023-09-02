@@ -7,7 +7,7 @@ import Home from '../Components/Home/Home';
 import Detail from '../Components/Detail/Detail';
 import Form from '../Components/Form/Form';
 import Nav from '../Components/Nav/Nav';
-import SearchName from '../Components/Search/Search';
+
 
 
 
@@ -26,7 +26,7 @@ function App() {
         <Route path='/home' element={<Home/>} />
         <Route path='/detail/:id' element={<Detail/>} />
         <Route path='/form' element={<Form/>} />
-        <Route path='/search' element={<SearchName/>}/>
+        
       </Routes>
        
     </div>
