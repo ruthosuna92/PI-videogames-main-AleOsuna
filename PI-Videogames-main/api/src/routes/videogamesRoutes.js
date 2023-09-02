@@ -39,10 +39,12 @@ videogamesRoutes.get('/', async (req, res)=>{
 })
 
 videogamesRoutes.get('/:idVideogame', async (req, res)=>{
-    const {idVideogame} = req.params
+    let {idVideogame} = req.params
+    console.log(idVideogame);
     try {
         if(idVideogame){
-            const resp = await getVideogameById(idVideogame)
+            
+            const resp = await getVideogameById(Number(idVideogame))
             return res.status(200).json(resp)
         }
         res.status(200).send('Ruta get :idVideogame respondiendo')

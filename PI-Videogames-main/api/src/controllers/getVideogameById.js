@@ -8,6 +8,7 @@ const axios = require('axios')
 module.exports = async (idVideogame) => {
 
     try {
+        
         if (isNaN(Number(idVideogame))) {
             const videogameDetailBD  = await Videogame.findOne({
                 where: {id: idVideogame},
