@@ -1,0 +1,22 @@
+/* Card.css */
+
+.card {
+    width: 300px; /* Establece un ancho de 300px para la tarjeta */
+    border: 2px solid black;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+    display: inline-block; /* Permite que las tarjetas estén en línea unas con otras */
+    vertical-align: top; /* Alinea las tarjetas en la parte superior */
+    box-sizing: border-box; /* Incluye el borde y el padding en el ancho total de la tarjeta */
+  }
+  
+  .imgCard {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .card p {
+    margin: 5px 0;
+  }
+  
