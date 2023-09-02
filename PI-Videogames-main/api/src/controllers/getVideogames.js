@@ -14,8 +14,8 @@ module.exports = async () => {
             return {
                 id: videogame.id,
                 name: videogame.name,
-                image: videogame.background_image,
-                genre: videogame.genres.map((gen)=>{ 
+                background_image: videogame.background_image,
+                genres: videogame.genres.map((gen)=>{ 
                 return {name: gen.name}})
             }
         })
@@ -26,6 +26,7 @@ module.exports = async () => {
                 attributes: ['name'],
                 through: {attributes: []}
             },
+            attributes: ['id', 'name', 'background_image']
             
         });
           console.log(videogamesBD);

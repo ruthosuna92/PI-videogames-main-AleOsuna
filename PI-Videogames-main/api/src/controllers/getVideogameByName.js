@@ -17,7 +17,7 @@ module.exports = async (nameVideogame) => {
                 attributes: ['name'],
                 through: {attributes: []}
             },
-            
+            attributes: ['id', 'name', 'background_image']            
         });
 
         const videogames = (await axios(`https://api.rawg.io/api/games?search=${nameLow}&key=${API_KEY}`)).data.results
@@ -25,8 +25,10 @@ module.exports = async (nameVideogame) => {
             return {
                 id: videogame.id,
                 name: videogame.name,
-                image: videogame.background_image,
-                genre: videogame.genres.map((gen)=> gen.name)
+                background_image: videogame.background_image,
+                genres: videogame.genres.map((gen)=> {
+                    return {
+                        name: gen.name}})
             }
         })
         console.log(videogameNameBD);
