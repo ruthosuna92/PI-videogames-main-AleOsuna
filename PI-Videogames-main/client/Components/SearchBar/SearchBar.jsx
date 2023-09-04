@@ -1,7 +1,10 @@
 import { NavLink } from "react-router-dom"
 import { useState } from "react"
+import { useDispatch } from "react-redux"
+import { getByName } from "../../Redux/actions"
 
 const SearchBar = () => {
+    const dispatch = useDispatch()
     const [busqueda, setBusqueda] = useState({
         name: ''
     })
@@ -12,8 +15,8 @@ const SearchBar = () => {
         })
         
     }
-    const handleClick = () => {
-        
+    const handleClick = (e) => {
+        dispatch(getByName(busqueda.name))
         setBusqueda({
             name: ''
         })

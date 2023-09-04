@@ -1,4 +1,4 @@
-import { GET_ALL, GET_BY_ID, GET_BY_NAME } from "./actions-types"
+import { GET_ALL, GET_BY_ID, GET_BY_NAME, CREATE_VIDEOGAME } from "./actions-types"
 
 const initialState = {
     allVideogames: [],
@@ -21,6 +21,10 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 allVideogames: action.payload
+            }
+        case CREATE_VIDEOGAME:
+            return {
+                ...state
             }
         default:
             return { ...state }
