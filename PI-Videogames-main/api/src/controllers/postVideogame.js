@@ -14,7 +14,7 @@ module.exports = async (name, background_image, genres, description, platforms, 
         const vg = await videogame.addGenre(idGenre)
         return vg
     }))
-    return newVideogame
+    return 'Videojuego creado exitosamente'
 }
 
 

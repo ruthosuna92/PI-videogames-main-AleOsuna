@@ -53,7 +53,12 @@ videogamesRoutes.get('/:idVideogame', async (req, res)=>{
         res.status(500).json(error.message);
     }
 })
-
+// let persona = {
+//     altura: 1.6 ,
+//     peso: '60 kg',
+//     nombre: 'Mauricio Zuluaga',
+//     caracteristicas: ['barba', 'come mucho', 'es cansonsito', 'duerme 40 horas', 'come tripas de pollo']
+// }
 videogamesRoutes.post('/', async (req, res) => {
     try {
         const {name, background_image, genres, description, platforms, rating, released} = req.body
