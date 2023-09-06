@@ -21,7 +21,8 @@ const Detail = () => {
             <img src={videogameDetail?.background_image && videogameDetail?.background_image} alt={videogameDetail?.name && videogameDetail?.name}/>
             <p>Plataformas: {videogameDetail?.platforms && videogameDetail?.platforms.map((plat)=> <li>{plat}</li>)}</p>
             <p>Géneros: {videogameDetail?.genres && videogameDetail?.genres?.map((gen)=><li>{gen}</li>)}</p>
-
+            <p>Descripción: {videogameDetail.description && videogameDetail.description.split('<p>').join('').split('</p>').join('')}</p>
+            <p>Rating: {videogameDetail.rating && videogameDetail.rating}</p>
         </div>
     )
 }

@@ -1,10 +1,10 @@
 import './Card.css'
 import { NavLink } from 'react-router-dom'
 
-const Card = ({background_image, name, genres, id}) => {
+const Card = ({background_image, name, genres, id, index}) => {
     
     return (
-        <div key={id} className="card">
+        <div key={index} className="card">
             <img className="imgCard" src={background_image } alt={name} />
             <p><NavLink to={`/detail/${id}`}>{name}</NavLink></p>
             <p>{genres}</p>

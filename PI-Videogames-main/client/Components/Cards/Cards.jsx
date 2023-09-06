@@ -1,19 +1,18 @@
 import Card from "../Card/Card"
+import { useEffect } from "react";
 
-const Cards = ({videogames}) => {
-    
-    
-    
+const Cards = ({juegosFiltradosState}) => {
+   
 
 
     return (
         <div>
-            {videogames?.map((videogame) => {
+            {juegosFiltradosState?.map((videogame, index) => {
                 return <Card
                     background_image={videogame?.background_image && videogame?.background_image}
                     name = { videogame?.name && videogame?.name }
                     genres = { videogame?.genres.map((gen) => <li>{gen.name}</li>) && videogame?.genres.map((gen) => <li>{gen.name}</li>) }
-                    key = { videogame?.id && videogame?.id }
+                    key = { index }
                     id = { videogame?.id && videogame?.id }
                 />
             })}

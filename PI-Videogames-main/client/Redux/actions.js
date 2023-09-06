@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { GET_ALL, GET_BY_ID, GET_BY_NAME, CREATE_VIDEOGAME } from './actions-types'
+import { GET_ALL, GET_BY_ID, GET_BY_NAME, CREATE_VIDEOGAME} from './actions-types'
 
 export const getAllGames = () => {
     return async (dispatch) => {
@@ -52,9 +52,10 @@ export const postVideogame = (videogame) => {
    return async (dispatch) => {
      try {
        const endpoint = `http://localhost:3002/videogames`;
-       await axios.post(endpoint, videogame);
+       const {data} = await axios.post(endpoint, videogame);
        return dispatch({
-         type: CREATE_VIDEOGAME
+         type: CREATE_VIDEOGAME,
+         payload: data
        });
      } catch (err) {
        console.log(err);
@@ -62,3 +63,4 @@ export const postVideogame = (videogame) => {
    };
 
 };
+
