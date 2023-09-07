@@ -1,5 +1,5 @@
 import Card from "../Card/Card"
-import { useEffect } from "react";
+
 
 const Cards = ({juegosFiltradosState}) => {
    

@@ -1,7 +1,7 @@
 const regexReleased = /^(?:20\d{2}|19\d{2})-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\d|3[01])$/
 const regexRating = /^(0\.[0-9]{2}|[1-4](\.[0-9]{2})?|5\.00)$/
 
-export const validations = (created, value) => {
+export const validations = (created) => {
     let errors = {}
     if(!created.name){
         errors.eName = 'Por favor ingrese un nombre'

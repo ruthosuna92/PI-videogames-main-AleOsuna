@@ -1,8 +1,9 @@
 import Cards from "../Cards/Cards"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-
+import './Home.css'
 import { getAllGames } from "../../Redux/actions"
+import Paginacion from '../Paginacion/Paginacion';
 
 
 
@@ -15,47 +16,62 @@ const Home = () => {
         origen: ''
     })
     const [juegosFiltradosState, setJuegosFiltradosState] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [currentPage, setCurrentPage] = useState(1);
+    const gamesPerPage = 15;
+
+    const onPageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
+
+    const startIndex = (currentPage - 1) * gamesPerPage;
+    const endIndex = startIndex + gamesPerPage;
 
     useEffect(() => {
+        setIsLoading(true); 
         dispatch(getAllGames())
-    }, [])
+            .then(() => {
+                setIsLoading(false); 
+            });
+    }, []);
 
     useEffect(() => {
 
         let juegosFiltrados = [...allVideogames];
 
         if (filtros.orden === 'A') {
-            juegosFiltrados.sort((juegoA, juegoB) => juegoA.name.localeCompare(juegoB.name));
+            juegosFiltrados.sort((juegoA, juegoB) => juegoA.name.localeCompare(juegoB.name))
+            
         }
-        if(filtros.orden === 'D'){
+        if (filtros.orden === 'D') {
             juegosFiltrados.sort((juegoA, juegoB) => juegoB.name.localeCompare(juegoA.name));
         }
-        if(filtros.origen === 'Api'){
+        if (filtros.origen === 'Api') {
             juegosFiltrados = juegosFiltrados.filter((videojuego) => typeof videojuego.id === 'number')
         }
-        if(filtros.origen === 'Database'){
+        if (filtros.origen === 'Database') {
             juegosFiltrados = juegosFiltrados.filter((videojuego) => typeof videojuego.id !== 'number')
         }
-        if(filtros.generos.length){
-            console.log('adentro del if de generos');
+        if (filtros.generos.length) {
+
             let juegosFiltradosPorGenero = []
-            for(let i = 0; i < filtros.generos.length; i++){
+            for (let i = 0; i < filtros.generos.length; i++) {
                 let generoSeleccionado = filtros.generos[i]
-                console.log(generoSeleccionado);
-                for(let j = 0; j < juegosFiltrados.length; j++){
+
+                for (let j = 0; j < juegosFiltrados.length; j++) {
                     let generosDelJuego = juegosFiltrados[j].genres
-                    console.log(generosDelJuego);
-                    for(let k = 0; k < generosDelJuego.length; k++){
+
+                    for (let k = 0; k < generosDelJuego.length; k++) {
                         let generoDelJuego = generosDelJuego[k].name
-                        if(generoDelJuego === generoSeleccionado){
+                        if (generoDelJuego === generoSeleccionado) {
                             juegosFiltradosPorGenero.push(juegosFiltrados[j])
                         }
                     }
                 }
             }
-           juegosFiltrados = juegosFiltradosPorGenero
+            juegosFiltrados = juegosFiltradosPorGenero
         }
-
+        
         setJuegosFiltradosState(juegosFiltrados);
     }, [filtros, allVideogames])
 
@@ -73,80 +89,93 @@ const Home = () => {
             });
         }
     }
-
-
-    console.log(filtros.origen);
-    console.log(filtros.generos);
-    
+    const handleGeneros = (e) => {
+        e.preventDefault()
+        console.log(e.target.name);
+        setFiltros({
+            ...filtros,
+            generos: filtros.generos.filter((gen) => gen !== e.target.name)
+        })
+    }
+    const juegosPorPagina = juegosFiltradosState.slice(startIndex, endIndex);
+    console.log(filtros);
     return (
-        <div>
-            <p>Soy el Home!!</p>
-            <select name="orden" value={filtros.orden} onChange={handleChange}>
-                <option value="">Seleccionar orden</option>
-                <option value="A">Ascendente</option>
-                <option value="D">Descendente</option>
-            </select>
-            <select name="origen" value={filtros.origen} onChange={handleChange}>
-            <option value="">Seleccionar orden</option>
-                <option value='Api'>Api</option>
-                <option value='Database'>Database</option>
-            </select>
-            <select name="generos" onChange={handleChange}>
-            <option value="">Seleccionar orden</option>
-                <option value="Action">Action</option>
-                <option value="Adventure">Adventure</option>
-                <option value="Indie">Indie</option>
-                <option value="RPG">RPG</option>
-                <option value="Strategy">Strategy</option>
-                <option value="Shooter">Shooter</option>
-                <option value="Casual">Casual</option>
-                <option value="Simulation">Simulation</option>
-                <option value="Puzzle">Puzzle</option>
-                <option value="Arcade">Arcade</option>
-                <option value="Platformer">Platformer</option>
-                <option value="Massively Multiplayer">Massively Multiplayer</option>
-                <option value="Racing">Racing</option>
-                <option value="Sports">Sports</option>
-                <option value="Fighting">Fighting</option>
-                <option value="Family">Family</option>
-                <option value="Board Games">Board Games</option>
-                <option value="Educational">Educational</option>
-                <option value="Card">Card</option>
-            </select>
-            <Cards juegosFiltradosState={juegosFiltradosState} />
+        <div className="home-container">
+           
+            {isLoading && (
+            <div className="loading-container">
+                <div className="neon-loading">
+                    <div className="neon-circle"></div>
+                    Loading
+                </div>
+            </div>
+        )}
+            <div className="filters-container">
+                <p>Ordenar alfabéticamente</p>
+                <select name="orden" value={filtros.orden} onChange={handleChange}>
+                    <option value="">Seleccionar orden</option>
+                    <option value="A">Ascendente</option>
+                    <option value="D">Descendente</option>
 
+                </select>
+                <p>Filtrar por origen</p>
+                <select name="origen" value={filtros.origen} onChange={handleChange}>
+
+                    <option value="">Seleccionar origen</option>
+                    <option value='Api'>Api</option>
+                    <option value='Database'>Database</option>
+                </select>
+                <p>Filtrar por género</p>
+                <select name="generos" onChange={handleChange}>
+
+                    <option value="">Seleccionar género</option>
+                    <option value="Action">Action</option>
+                    <option value="Adventure">Adventure</option>
+                    <option value="Indie">Indie</option>
+                    <option value="RPG">RPG</option>
+                    <option value="Strategy">Strategy</option>
+                    <option value="Shooter">Shooter</option>
+                    <option value="Casual">Casual</option>
+                    <option value="Simulation">Simulation</option>
+                    <option value="Puzzle">Puzzle</option>
+                    <option value="Arcade">Arcade</option>
+                    <option value="Platformer">Platformer</option>
+                    <option value="Massively Multiplayer">Massively Multiplayer</option>
+                    <option value="Racing">Racing</option>
+                    <option value="Sports">Sports</option>
+                    <option value="Fighting">Fighting</option>
+                    <option value="Family">Family</option>
+                    <option value="Board Games">Board Games</option>
+                    <option value="Educational">Educational</option>
+                    <option value="Card">Card</option>
+                </select>
+
+                <div className="selected-genres-container">
+                    {filtros.generos &&
+                        filtros.generos.map((gen) => (
+                            <div key={gen} className="selected-genre">
+                                <button name={gen} onClick={handleGeneros} className="remove-genre">
+                                    x
+                                </button>
+                                {gen}
+                            </div>
+                        ))}
+                </div>
+
+            </div>
+                <Paginacion
+                    currentPage={currentPage}
+                    totalPages={Math.ceil(juegosFiltradosState.length / gamesPerPage)}
+                    onPageChange={onPageChange}
+                />
+                <button>Filtrar</button>
+            <div className="cards-container">
+            {!isLoading ? (
+                <Cards juegosFiltradosState={juegosPorPagina} />
+            ) : null}
+        </div>
         </div>
     )
 }
 
 export default Home
-
-
-            // const videogames = [{
-            //     id: 908462,
-            //     name: "MAURICE",
-            //     background_image: "https://media.rawg.io/media/screenshots/ee5/ee51a13c66a951d8d19ab49ad3809b63.jpg",
-            //     genres: []
-            // },
-            // {
-            //     id: 412447,
-            //     name: "Reach (Mauricio Castillo)",
-            //     background_image: "https://media.rawg.io/media/screenshots/843/843cdcedebe333b86cea258afe188cea.jpg",
-            //     genres: []
-            // },
-            // {
-            //     id: 722296,
-            //     name: "Detetive (Mauriiicio)",
-            //     background_image: "https://media.rawg.io/media/screenshots/bbb/bbbe68b00957e60bb2ca26aea5aceea8.jpg",
-            //     genres: [
-            //         {
-            //             name: "Adventure"
-            //         }
-            //     ]
-            // },
-            // {
-            //     id: 850501,
-            //     name: "Team 13 - The Legend of Maurice",
-            //     background_image: "https://media.rawg.io/media/screenshots/739/73988c574f64da0c171465c1b80b1f54.jpg",
-            //     genres: []
-            // }]

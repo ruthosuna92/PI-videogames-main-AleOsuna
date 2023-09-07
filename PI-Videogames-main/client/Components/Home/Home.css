@@ -1,0 +1,106 @@
+/* Home.css */
+.filters-container {
+  background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px;
+    width: 250px;
+    position: fixed;
+    height: 100%;
+    overflow-y: auto; /* Agrega una barra de desplazamiento vertical si es necesario */
+    margin-top: 52px;
+}
+
+.cards-container {
+    margin-left: 270px;
+    padding: 20px;
+    min-height: 100vh; /* Altura mínima para asegurar que la barra de filtrado se mantenga fija */
+    
+}
+
+  /* Resto de tus estilos */
+  
+
+/* Home.css */
+
+.selected-genres-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Espacio entre las palabras */
+  }
+  
+  .selected-genre {
+    display: flex;
+    align-items: center;
+  }
+  
+  .remove-genre {
+    background: none;
+    border: none;
+    font-size: 12px;
+    padding: 0;
+    margin-right: 5px; /* Espacio entre la "X" y la palabra */
+    color: red;
+    cursor: pointer;
+  }
+
+
+.loading-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000; /* Fondo negro */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Asegura que esté en la parte superior */
+}
+
+.neon-loading {
+  font-size: 24px;
+  color: #FF00FF; /* Color fucsia "neón" */
+  text-align: center;
+  text-transform: uppercase;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.neon-circle {
+  width: 50px;
+  height: 50px;
+  background-color: #FF00FF; /* Color de fondo fucsia */
+  border-radius: 50%;
+  animation: neon 1s linear infinite, rotate 2s linear infinite; /* Agrega animación de neon y rotación */
+}
+
+@keyframes neon {
+  0%, 100% {
+      box-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF, 0 0 30px #FF00FF;
+  }
+  50% {
+      box-shadow: none;
+  }
+}
+
+@keyframes rotate {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+}
+select {
+  background-color: rgba(0, 0, 0, 0.8); /* Fondo negro transparente */
+  color: white; /* Texto blanco */
+  border: 2px solid #FF00FF; /* Borde fucsia neon */
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+  width: 100%; /* Ancho completo del contenedor */
+}
+
+/* Estilos para los botones de filtrar y las demás etiquetas */

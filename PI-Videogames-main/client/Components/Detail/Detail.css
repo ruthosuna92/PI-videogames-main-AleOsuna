@@ -1,0 +1,59 @@
+.detail-container {
+    background-color: rgba(0, 0, 0, 0.8); /* Fondo negro más oscuro */
+    border-radius: 10px; /* Esquinas redondeadas */
+    display: flex;
+    width: 70%; /* Ancho del contenedor, ajusta según sea necesario */
+    margin: 80px auto 0; /* Centra horizontalmente */
+    padding: 10px; /* Espacio interior general */
+    
+  }
+  
+  .detail-image {
+    flex: 1; /* Toma la mitad del espacio disponible */
+    padding: 20px; /* Espacio interior para la imagen */
+  }
+  
+  .detail-info {
+    flex: 1; /* Toma la otra mitad del espacio disponible */
+    padding: 20px; /* Espacio interior para la información */
+    color: white; /* Color del texto */
+  }
+  
+  .detail-image img {
+    max-width: 100%;
+    border-radius: 10px; /* Esquinas redondeadas para la imagen */
+  }
+  
+  .detail-container {
+    background-color: rgba(0, 0, 0, 0.8); /* Fondo negro más oscuro */
+    border-radius: 80px; /* Esquinas redondeadas */
+    display: flex;
+    width: 80%; /* Ancho del contenedor, ajusta según sea necesario */
+    margin: 60px auto 0; /* Margen superior para dejar espacio a la barra de navegación */
+    padding: 10px; /* Espacio interior general */
+  }
+  
+  .detail-left {
+    flex: 1; /* Ocupa todo el espacio disponible en el lado izquierdo */
+    padding: 30px; /* Espacio interior para el contenido izquierdo */
+    color: white;
+    
+  }
+  
+  .detail-image {
+    max-width: 100%; /* Ajusta el tamaño de la imagen para que quepa en su contenedor */
+    border-radius: 50px; /* Esquinas redondeadas para la imagen */
+  }
+  
+  .detail-right {
+    flex: 1; /* Ocupa todo el espacio disponible en el lado derecho */
+    padding: 30px; /* Espacio interior para el contenido derecho */
+    color: white; /* Color del texto en el lado derecho */
+  }
+
+  
+  
+  /* Resto de tus estilos */
+
+  
+  

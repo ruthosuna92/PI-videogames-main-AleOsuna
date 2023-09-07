@@ -1,0 +1,76 @@
+/* Form.css */
+
+.form-container {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px;
+    width: 300px;
+    border-radius: 10px; /* Borde redondeado */
+    margin: 0 auto; /* Centra el formulario horizontalmente */
+    margin-top: 100px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+}
+
+input,
+textarea,
+select,
+button {
+    margin-bottom: 10px;
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+}
+
+.error-text {
+    color: red; /* Color de texto rojo para errores */
+    font-size: 12px; /* Tamaño de fuente más pequeño para errores */
+    margin-top: -10px;
+}
+
+.success-text {
+    color: limegreen; /* Color de texto verde para éxito */
+    font-size: 16px; /* Tamaño de fuente más grande para éxito */
+}
+
+.neon-input {
+    background-color: transparent;
+    border: 2px solid #FF00FF;
+    color: #FF00FF;
+    font-size: 16px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s, text-shadow 0.3s;
+    outline: none;
+  }
+  
+  .neon-input:focus {
+    /* background-color: #FF00FF; */
+    color: #FFFFFF;
+    box-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF, 0 0 30px #FF00FF;
+    /* text-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF, 0 0 30px #FF00FF; */
+  }
+  .eliminar-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+.eliminar-icon {
+    width: 12px; /* Ajusta el tamaño de la imagen de la lupa según sea necesario */
+    height: 12px;
+  }
+.container-genres {
+    display: flex;
+    justify-content: space-between;
+    display: inline-block;
+  vertical-align: top;
+  box-sizing: border-box;
+}

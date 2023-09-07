@@ -1,9 +1,10 @@
 import {NavLink} from 'react-router-dom'
+import './LandingPage.css'
 
 const LandingPage = () => {
     return (
         <div>
-            <button><NavLink to='/home'> Home </NavLink> </button>
+            <NavLink to='/home' className="button-neon"> Home </NavLink> 
             <p>Soy la landing Page!!!</p>
         </div>
     )

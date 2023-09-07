@@ -1,0 +1,39 @@
+/* LandingPage.css */
+
+body {
+    background-image: url('https://bloges.influence4you.com/wp-content/uploads/2022/11/Die-TOP-20-Gaming-YouTuber-2022-scaled.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.button-neon {
+    background-color: transparent;
+    border: 2px solid #e600ff; /* Color del contorno del botón */
+    color: #e600ff; /* Color del texto del botón */
+    font-size: 20px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+    outline: none;
+}
+
+.button-neon a {
+    outline: none;
+    text-decoration: none; /* Elimina el subrayado predeterminado */
+
+}
+
+.button-neon:hover {
+    background-color: #e600ff; /* Cambio de color de fondo al hacer hover */
+    color: #ff0066; /* Cambio de color del texto al hacer hover */
+    box-shadow: 0 0 10px #e600ff, 0 0 20px #e600ff, 0 0 30px #e600ff; /* Efecto de neón al hacer hover */
+
+}

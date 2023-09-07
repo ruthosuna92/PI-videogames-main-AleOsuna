@@ -1,15 +1,19 @@
-import './Card.css'
-import { NavLink } from 'react-router-dom'
+// Tu componente Card.js
+import './Card.css';
+import { NavLink } from 'react-router-dom';
 
-const Card = ({background_image, name, genres, id, index}) => {
-    
+const Card = ({ background_image, name, genres, id, index }) => {
     return (
         <div key={index} className="card">
-            <img className="imgCard" src={background_image } alt={name} />
-            <p><NavLink to={`/detail/${id}`}>{name}</NavLink></p>
-            <p>{genres}</p>
+            <div className="card-inner">
+                <img className="imgCard" src={background_image} alt={name} />
+                <div className="content">
+                    <p><NavLink to={`/detail/${id}`} className='text-neon'>{name}</NavLink></p>
+                    <p>{genres}</p>
+                </div>
+            </div>
         </div>
-    )
+    );
 }
 
-export default Card
+export default Card;

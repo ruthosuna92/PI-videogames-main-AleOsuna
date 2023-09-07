@@ -1,0 +1,26 @@
+/* Agrega estas clases a tu archivo de estilos CSS */
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding-top: 70px;
+}
+
+.neon-button {
+    background-color: transparent;
+    border: 2px solid #FF00FF; /* Color del contorno del botón */
+    color: #FF00FF; /* Color del texto del botón */
+    font-size: 18px;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+    outline: none;
+}
+
+.neon-button.active {
+    background-color: #FF00FF; /* Cambio de color de fondo para el botón activo */
+    color: #FFFFFF; /* Cambio de color del texto para el botón activo */
+    box-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF, 0 0 30px #FF00FF; /* Efecto de neón para el botón activo */
+}
