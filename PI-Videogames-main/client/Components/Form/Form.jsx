@@ -18,7 +18,9 @@ const Form = () => {
     rating: "",
     released: "",
     }); 
-    const [focusedInput, setFocusedInput] = useState(""); // Estado para rastrear el input enfocado
+    const [focusedInput, setFocusedInput] = useState(''); // Estado para rastrear el input enfocado
+    const [onBlurInput, setOnBlurInput] = useState('')
+    console.log(focusedInput);
   const handleChange = (e) => {
     if (e.target.name === "genres") {
       if (created.genres.includes(e.target.value)) {
@@ -71,7 +73,11 @@ const Form = () => {
   };
   const handleInputFocus = (inputName) => {
     setFocusedInput(inputName);
-  };
+  }
+  const handleOnBlur = (inName) =>{
+    setOnBlurInput(inName)
+
+  }
   return (
     <div className="form-container">
       <form onSubmit={handleSubmit}>
@@ -84,10 +90,10 @@ const Form = () => {
           name="name"
           value={created.name}
           onFocus={() => handleInputFocus("name")}
-          onBlur={() => handleInputFocus("")}
+          onBlur={() => handleOnBlur("name")}
           className={focusedInput === "name" ? "neon-input" : ""}
         />
-        {errors.eName && <p className="error-text">{errors.eName}</p>}
+        {onBlurInput === 'name' &&errors.eName && <p className="error-text">{errors.eName}</p>}
         <label>Descripción</label>
         <textarea
           placeholder="Ingresa la descripción de tu videojuego..."
@@ -95,10 +101,10 @@ const Form = () => {
           name="description"
           value={created.description}
           onFocus={() => handleInputFocus("description")}
-          onBlur={() => handleInputFocus("")}
+          onBlur={() => handleOnBlur("description")}
           className={focusedInput === "description" ? "neon-input" : ""}
         ></textarea>
-        {errors.eDescription && (
+        {onBlurInput === 'description' && errors.eDescription && (
           <p className="error-text">{errors.eDescription}</p>
         )}
         <label>Plataforma</label>
@@ -108,10 +114,10 @@ const Form = () => {
           name="platforms"
           value={created.platforms}
           onFocus={() => handleInputFocus("platforms")}
-          onBlur={() => handleInputFocus("")}
+          onBlur={() => handleOnBlur("platforms")}
           className={focusedInput === "platforms" ? "neon-input" : ""}
         />
-        {errors.ePlatforms && <p className="error-text">{errors.ePlatforms}</p>}
+        {onBlurInput === 'platforms' && errors.ePlatforms && <p className="error-text">{errors.ePlatforms}</p>}
         <label>Fecha de lanzamiento</label>
         <input
           placeholder="aaaa-mm-dd"
@@ -119,10 +125,10 @@ const Form = () => {
           name="released"
           value={created.released}
           onFocus={() => handleInputFocus("released")}
-          onBlur={() => handleInputFocus("")}
+          onBlur={() => handleOnBlur("released")}
           className={focusedInput === "released" ? "neon-input" : ""}
         />
-        {errors.eReleased && <span className="error-text">{errors.eReleased}</span>}
+        {onBlurInput === 'released' && errors.eReleased && <span className="error-text">{errors.eReleased}</span>}
         <label>Rating</label>
         <input
           placeholder="0.00 a 5.00"
@@ -130,13 +136,14 @@ const Form = () => {
           name="rating"
           value={created.rating}
           onFocus={() => handleInputFocus("rating")}
-          onBlur={() => handleInputFocus("")}
+          onBlur={() => handleOnBlur("rating")}
           className={focusedInput === "rating" ? "neon-input" : ""}
         />
-        {errors.eRating1 && <p className="error-text">{errors.eRating1}</p>}
-        {errors.eRating2 && <p className="error-text">{errors.eRating2}</p>}
-        <select name="genres" onChange={handleChange}>
-        
+        {onBlurInput === 'rating' && errors.eRating1 && <p className="error-text">{errors.eRating1}</p>}
+        {onBlurInput === 'rating' && errors.eRating2 && <p className="error-text">{errors.eRating2}</p>}
+        <select name="genres" onChange={handleChange}
+        onFocus={() => handleInputFocus("genres")}
+        onBlur={() => handleOnBlur("genres")}>
                 <option value="Action">Action</option>
                 <option value="Adventure">Adventure</option>
                 <option value="Indie">Indie</option>
@@ -156,10 +163,9 @@ const Form = () => {
                 <option value="Board Games">Board Games</option>
                 <option value="Educational">Educational</option>
                 <option value="Card">Card</option>
-            
         </select>
         <div className="container-genres">
-        {created.genres &&
+        {onBlurInput === 'genres' && created.genres &&
           created.genres.map((gen) => (
             <span key={gen} className="generos">{gen}<button name={gen} onClick={handleGenres} className="eliminar-button"><img
                     src="https://freepngimg.com/thumb/alphabets/22-2-x-alphabet-png.png" 
@@ -169,14 +175,8 @@ const Form = () => {
                 /></button>
             </span>
           ))}
-
-
         </div>
-
-
-
-
-        {errors.eGenres1 && <p className="error-text">{errors.eGenres1}</p>}
+        {onBlurInput === 'genres' && errors.eGenres1 && <p className="error-text">{errors.eGenres1}</p>}
         <label>Imagen</label>
         <input
           placeholder="Ingresa el URL de la imagen de tu videojuego"
@@ -184,10 +184,10 @@ const Form = () => {
           name="background_image"
           value={created.background_image}
           onFocus={() => handleInputFocus("background_image")}
-          onBlur={() => handleInputFocus("")}
+          onBlur={() => handleOnBlur("background_image")}
           className={focusedInput === "background_image" ? "neon-input" : ""}
         />
-        {errors.eImage && <p className="error-text">{errors.eImage}</p>}
+        {onBlurInput === 'background_image' && errors.eImage && <p className="error-text">{errors.eImage}</p>}
         <button type="submit" value="valor">
           Crear
         </button>

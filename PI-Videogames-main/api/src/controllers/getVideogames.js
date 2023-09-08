@@ -6,9 +6,9 @@ const {Videogame, Genre} = require('../db')
 
 module.exports = async () => {
     try {
-        const resp1 = (await axios(`https://api.rawg.io/api/games?page_size=40&page=1&key=${API_KEY}`)).data.results
-        const resp2 = (await axios(`https://api.rawg.io/api/games?page_size=40&page=2&key=${API_KEY}`)).data.results
-        const resp3 = (await axios(`https://api.rawg.io/api/games?page_size=20&page=3&key=${API_KEY}`)).data.results
+        const resp1 = (await axios(`https://api.rawg.io/api/games?page_size=40&page=3&key=${API_KEY}`)).data.results
+        const resp2 = (await axios(`https://api.rawg.io/api/games?page_size=40&page=6&key=${API_KEY}`)).data.results
+        const resp3 = (await axios(`https://api.rawg.io/api/games?page_size=20&page=9&key=${API_KEY}`)).data.results
         const videogamesApi = [...resp1, ...resp2, ...resp3].map((videogame)=> {
             return {
                 id: videogame.id,

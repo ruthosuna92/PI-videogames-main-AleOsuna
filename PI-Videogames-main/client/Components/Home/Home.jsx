@@ -8,30 +8,30 @@ import Paginacion from '../Paginacion/Paginacion';
 
 
 const Home = () => {
-    const allVideogames = useSelector((state) => state.allVideogames)
+    const allVideogames = useSelector((state) => state.allVideogames) // me traigo los videojuegos que guardé en el estado global
     const dispatch = useDispatch()
-    const [filtros, setFiltros] = useState({
+    const [filtros, setFiltros] = useState({ // estado local para los filtros
         orden: '',
         generos: [],
         origen: ''
     })
-    const [juegosFiltradosState, setJuegosFiltradosState] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [currentPage, setCurrentPage] = useState(1);
-    const gamesPerPage = 15;
+    const [juegosFiltradosState, setJuegosFiltradosState] = useState([]); // estado para guardar dinámicamente los juegos que se van filtrando con los diferentes select
+    const [isLoading, setIsLoading] = useState(true); // estado local para cuando todavía no hay cards
+    const [currentPage, setCurrentPage] = useState(1); // estado local para calcular el paginado
+    const gamesPerPage = 15;// cantidad de juegos que se muestran por página
 
-    const onPageChange = (pageNumber) => {
+    const onPageChange = (pageNumber) => { // función que actualiza el número de página que se esta mostrando
         setCurrentPage(pageNumber);
     };
 
-    const startIndex = (currentPage - 1) * gamesPerPage;
-    const endIndex = startIndex + gamesPerPage;
+    const startIndex = (currentPage - 1) * gamesPerPage; //cálculo para el índice de la primera posición en el array de videojuegos, para luego utilizarlo en un slice
+    const endIndex = startIndex + gamesPerPage; //cálculo del segundo índice que se le pasa por parámetro al slice, ya que corta una posición antes
 
     useEffect(() => {
-        setIsLoading(true); 
+        setIsLoading(true);
         dispatch(getAllGames())
             .then(() => {
-                setIsLoading(false); 
+                setIsLoading(false);
             });
     }, []);
 
@@ -41,7 +41,7 @@ const Home = () => {
 
         if (filtros.orden === 'A') {
             juegosFiltrados.sort((juegoA, juegoB) => juegoA.name.localeCompare(juegoB.name))
-            
+
         }
         if (filtros.orden === 'D') {
             juegosFiltrados.sort((juegoA, juegoB) => juegoB.name.localeCompare(juegoA.name));
@@ -55,23 +55,21 @@ const Home = () => {
         if (filtros.generos.length) {
 
             let juegosFiltradosPorGenero = []
-            for (let i = 0; i < filtros.generos.length; i++) {
-                let generoSeleccionado = filtros.generos[i]
 
-                for (let j = 0; j < juegosFiltrados.length; j++) {
-                    let generosDelJuego = juegosFiltrados[j].genres
 
-                    for (let k = 0; k < generosDelJuego.length; k++) {
-                        let generoDelJuego = generosDelJuego[k].name
-                        if (generoDelJuego === generoSeleccionado) {
-                            juegosFiltradosPorGenero.push(juegosFiltrados[j])
-                        }
-                    }
+            for (let j = 0; j < juegosFiltrados.length; j++) {
+                let generosDelJuego = juegosFiltrados[j].genres.map((a) => a.name)
+                const coincide = filtros.generos.every(gen => generosDelJuego.includes(gen));
+                if (coincide && !juegosFiltradosPorGenero.includes(juegosFiltrados[j])) {
+                    juegosFiltradosPorGenero.push(juegosFiltrados[j])
                 }
             }
+
+            console.log(juegosFiltradosPorGenero);
             juegosFiltrados = juegosFiltradosPorGenero
+
         }
-        
+
         setJuegosFiltradosState(juegosFiltrados);
     }, [filtros, allVideogames])
 
@@ -98,18 +96,18 @@ const Home = () => {
         })
     }
     const juegosPorPagina = juegosFiltradosState.slice(startIndex, endIndex);
-    console.log(filtros);
+
     return (
         <div className="home-container">
-           
+
             {isLoading && (
-            <div className="loading-container">
-                <div className="neon-loading">
-                    <div className="neon-circle"></div>
-                    Loading
+                <div className="loading-container">
+                    <div className="neon-loading">
+                        <div className="neon-circle"></div>
+                        Loading
+                    </div>
                 </div>
-            </div>
-        )}
+            )}
             <div className="filters-container">
                 <p>Ordenar alfabéticamente</p>
                 <select name="orden" value={filtros.orden} onChange={handleChange}>
@@ -163,17 +161,17 @@ const Home = () => {
                 </div>
 
             </div>
-                <Paginacion
-                    currentPage={currentPage}
-                    totalPages={Math.ceil(juegosFiltradosState.length / gamesPerPage)}
-                    onPageChange={onPageChange}
-                />
-                <button>Filtrar</button>
+            <Paginacion
+                currentPage={currentPage}
+                totalPages={Math.ceil(juegosFiltradosState.length / gamesPerPage)}
+                onPageChange={onPageChange}
+            />
+            <button>Filtrar</button>
             <div className="cards-container">
-            {!isLoading ? (
-                <Cards juegosFiltradosState={juegosPorPagina} />
-            ) : null}
-        </div>
+                {!isLoading ? (
+                    <Cards juegosFiltradosState={juegosPorPagina} />
+                ) : null}
+            </div>
         </div>
     )
 }

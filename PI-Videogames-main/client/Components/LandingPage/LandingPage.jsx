@@ -3,7 +3,7 @@ import './LandingPage.css'
 
 const LandingPage = () => {
     return (
-        <div>
+        <div className='container'>
             <NavLink to='/home' className="button-neon"> Home </NavLink> 
             <p>Soy la landing Page!!!</p>
         </div>

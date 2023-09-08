@@ -6,13 +6,18 @@ body {
     background-repeat: no-repeat;
     background-position: center center;
     min-height: 100vh;
-    display: flex;
+    /* display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
     margin: 0;
     padding: 0;
 }
-
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
 .button-neon {
     background-color: transparent;
     border: 2px solid #e600ff; /* Color del contorno del botón */
@@ -23,6 +28,7 @@ body {
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
     outline: none;
+    
 }
 
 .button-neon a {

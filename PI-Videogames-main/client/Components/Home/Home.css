@@ -8,6 +8,7 @@
     height: 100%;
     overflow-y: auto; /* Agrega una barra de desplazamiento vertical si es necesario */
     margin-top: 52px;
+    
 }
 
 .cards-container {
