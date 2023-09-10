@@ -2,7 +2,7 @@ import React from 'react';
 import SearchBar from "../SearchBar/SearchBar"
 import { NavLink, useLocation } from "react-router-dom"
 import { useDispatch } from "react-redux"
-import { getAllGames } from "../../Redux/actions"
+import { getAllGames, nameSearched } from "../../Redux/actions"
 import './Nav.css';
 
 const Nav = () => {
@@ -10,6 +10,7 @@ const Nav = () => {
     const dispatch = useDispatch();
     const handleClick = () => {
         dispatch(getAllGames());
+        dispatch(nameSearched(''))
     };
 
     return (

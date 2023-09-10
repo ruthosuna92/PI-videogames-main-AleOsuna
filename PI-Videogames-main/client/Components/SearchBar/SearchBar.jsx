@@ -4,10 +4,12 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getByName } from '../../Redux/actions';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { nameSearched } from '../../Redux/actions';
 
 const SearchBar = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate()
+    const location = useLocation().pathname
     const [busqueda, setBusqueda] = useState({
         name: ''
     });
@@ -20,11 +22,11 @@ const SearchBar = () => {
     };
 
     const handleClick = (e) => {
-        dispatch(getByName(busqueda.name));
-        navigate('/home')
+        dispatch(nameSearched(busqueda.name));
         setBusqueda({
             name: ''
         });
+        if(location !== '/home') navigate('/home')
     };
 
     return (

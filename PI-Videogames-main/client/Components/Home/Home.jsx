@@ -2,13 +2,14 @@ import Cards from "../Cards/Cards"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import './Home.css'
-import { getAllGames } from "../../Redux/actions"
+import { getAllGames, getByName } from "../../Redux/actions"
 import Paginacion from '../Paginacion/Paginacion';
 
 
 
 const Home = () => {
     const allVideogames = useSelector((state) => state.allVideogames) // me traigo los videojuegos que guardé en el estado global
+    const name = useSelector((state) => state.nameSearched)
     const dispatch = useDispatch()
     const [filtros, setFiltros] = useState({ // estado local para los filtros
         rating: '',
@@ -29,21 +30,21 @@ const Home = () => {
     const endIndex = startIndex + gamesPerPage; //cálculo del segundo índice que se le pasa por parámetro al slice, ya que corta una posición antes
     console.log(allVideogames);
     useEffect(() => {
-        setIsLoading(true)
-        if(allVideogames[allVideogames.length-1] !== undefined){
-            setIsLoading(false)
-        }
-       
-        if(!allVideogames.length){
+        
+        if(name){
+            setIsLoading(true)
+            dispatch(getByName(name))
+            .then(() => setIsLoading(false))
+            
+
+        } else {
             setIsLoading(true);
             dispatch(getAllGames())
-                .then(() => {
-                    setIsLoading(false);
-                })
-
+            .then(() => {
+                setIsLoading(false);
+            })
         }
-
-    }, []);
+    }, [name]);
 
     useEffect(() => {
 

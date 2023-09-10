@@ -1,9 +1,10 @@
-import { GET_ALL, GET_BY_ID, GET_BY_NAME, CREATE_VIDEOGAME} from "./actions-types"
+import { GET_ALL, GET_BY_ID, GET_BY_NAME, CREATE_VIDEOGAME, NAME_SEARCHED} from "./actions-types"
 
 const initialState = {
     allVideogames: [],
     videogameDetail: {},
-    postResponse: ''
+    postResponse: '',
+    nameSearched: ''
 }
 
 const reducer = (state = initialState, action) => {
@@ -28,7 +29,11 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 postResponse: action.payload
             }
-        
+        case NAME_SEARCHED:
+            return {
+                ...state,
+                nameSearched: action.payload
+            }
         default:
             return { ...state }
     }
