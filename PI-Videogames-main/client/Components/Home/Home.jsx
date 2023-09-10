@@ -11,9 +11,10 @@ const Home = () => {
     const allVideogames = useSelector((state) => state.allVideogames) // me traigo los videojuegos que guardé en el estado global
     const dispatch = useDispatch()
     const [filtros, setFiltros] = useState({ // estado local para los filtros
+        rating: '',
         orden: '',
         generos: [],
-        origen: ''
+        origen: '',
     })
     const [juegosFiltradosState, setJuegosFiltradosState] = useState([]); // estado para guardar dinámicamente los juegos que se van filtrando con los diferentes select
     const [isLoading, setIsLoading] = useState(true); // estado local para cuando todavía no hay cards
@@ -26,13 +27,22 @@ const Home = () => {
 
     const startIndex = (currentPage - 1) * gamesPerPage; //cálculo para el índice de la primera posición en el array de videojuegos, para luego utilizarlo en un slice
     const endIndex = startIndex + gamesPerPage; //cálculo del segundo índice que se le pasa por parámetro al slice, ya que corta una posición antes
-
+    console.log(allVideogames);
     useEffect(() => {
-        setIsLoading(true);
-        dispatch(getAllGames())
-            .then(() => {
-                setIsLoading(false);
-            });
+        setIsLoading(true)
+        if(allVideogames[allVideogames.length-1] !== undefined){
+            setIsLoading(false)
+        }
+       
+        if(!allVideogames.length){
+            setIsLoading(true);
+            dispatch(getAllGames())
+                .then(() => {
+                    setIsLoading(false);
+                })
+
+        }
+
     }, []);
 
     useEffect(() => {
@@ -40,11 +50,13 @@ const Home = () => {
         let juegosFiltrados = [...allVideogames];
 
         if (filtros.orden === 'A') {
-            juegosFiltrados.sort((juegoA, juegoB) => juegoA.name.localeCompare(juegoB.name))
-
+           console.log('entrando a la condicional de orden alfabetico');
+            juegosFiltrados = juegosFiltrados.sort((juegoA, juegoB) => juegoA.name.localeCompare(juegoB.name))
+            
         }
         if (filtros.orden === 'D') {
-            juegosFiltrados.sort((juegoA, juegoB) => juegoB.name.localeCompare(juegoA.name));
+            
+            juegosFiltrados = juegosFiltrados.sort((juegoA, juegoB) => juegoB.name.localeCompare(juegoA.name));
         }
         if (filtros.origen === 'Api') {
             juegosFiltrados = juegosFiltrados.filter((videojuego) => typeof videojuego.id === 'number')
@@ -52,10 +64,17 @@ const Home = () => {
         if (filtros.origen === 'Database') {
             juegosFiltrados = juegosFiltrados.filter((videojuego) => typeof videojuego.id !== 'number')
         }
+        if (filtros.rating === 'Ar') {
+           
+            juegosFiltrados = juegosFiltrados.sort((a, b) => a.rating - b.rating)
+        }
+        if (filtros.rating === 'Dr') {
+           
+            juegosFiltrados = juegosFiltrados.sort((a, b) => b.rating - a.rating)
+        }
         if (filtros.generos.length) {
 
             let juegosFiltradosPorGenero = []
-
 
             for (let j = 0; j < juegosFiltrados.length; j++) {
                 let generosDelJuego = juegosFiltrados[j].genres.map((a) => a.name)
@@ -64,17 +83,30 @@ const Home = () => {
                     juegosFiltradosPorGenero.push(juegosFiltrados[j])
                 }
             }
-
-            console.log(juegosFiltradosPorGenero);
+            
             juegosFiltrados = juegosFiltradosPorGenero
 
         }
 
         setJuegosFiltradosState(juegosFiltrados);
     }, [filtros, allVideogames])
-
+    
 
     const handleChange = (e) => {
+        if(e.target.name === 'rating'){
+            setFiltros({
+                ...filtros,
+                orden: '',
+                rating: e.target.value
+            })
+        }
+        if(e.target.name === 'orden'){
+            setFiltros({
+                ...filtros,
+                orden: e.target.value,
+                rating: ''
+            })
+        }
         if (e.target.name === 'generos') {
             setFiltros({
                 ...filtros,
@@ -123,9 +155,14 @@ const Home = () => {
                     <option value='Api'>Api</option>
                     <option value='Database'>Database</option>
                 </select>
+                <p>Filtrar por rating</p>
+                <select name="rating" value={filtros.rating} onChange={handleChange}>
+                    <option value="">Seleccionar rating</option>
+                    <option value='Ar'>Ascendente</option>
+                    <option value='Dr'>Descendente</option>
+                </select>
                 <p>Filtrar por género</p>
                 <select name="generos" onChange={handleChange}>
-
                     <option value="">Seleccionar género</option>
                     <option value="Action">Action</option>
                     <option value="Adventure">Adventure</option>
@@ -167,6 +204,7 @@ const Home = () => {
                 onPageChange={onPageChange}
             />
             <button>Filtrar</button>
+            {/* <div className="ventana"><p>Soy una ventana que se superpone</p></div> */}
             <div className="cards-container">
                 {!isLoading ? (
                     <Cards juegosFiltradosState={juegosPorPagina} />

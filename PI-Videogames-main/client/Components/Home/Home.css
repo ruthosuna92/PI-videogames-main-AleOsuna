@@ -10,6 +10,20 @@
     margin-top: 52px;
     
 }
+.ventana {
+  background-color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 20px;
+    position: fixed;
+    top: 100;
+    margin-left: 400px;
+    width: 60%;
+   height: 50%;
+    z-index: 1000; /* Asegura que la barra esté por encima del contenido */
+    
+}
 
 .cards-container {
     margin-left: 270px;

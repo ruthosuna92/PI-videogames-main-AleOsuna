@@ -14,6 +14,7 @@ const Cards = ({juegosFiltradosState}) => {
                     genres = { videogame?.genres.map((gen) => <li>{gen.name}</li>) && videogame?.genres.map((gen) => <li>{gen.name}</li>) }
                     key = { index }
                     id = { videogame?.id && videogame?.id }
+                    rating = { videogame?.rating && videogame?.rating}
                 />
             })}
         </div>

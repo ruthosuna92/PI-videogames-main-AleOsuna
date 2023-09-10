@@ -3,9 +3,11 @@ import './SearchBar.css';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getByName } from '../../Redux/actions';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const SearchBar = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate()
     const [busqueda, setBusqueda] = useState({
         name: ''
     });
@@ -19,6 +21,7 @@ const SearchBar = () => {
 
     const handleClick = (e) => {
         dispatch(getByName(busqueda.name));
+        navigate('/home')
         setBusqueda({
             name: ''
         });
