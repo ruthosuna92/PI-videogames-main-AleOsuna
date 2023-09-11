@@ -8,7 +8,7 @@
   display: inline-block;
   vertical-align: top;
   box-sizing: border-box;
-  overflow: hidden;
+  /* overflow: hidden; */
   border-radius: 50%; /* Hacer la tarjeta completamente redonda */
   transition: border-radius 0.3s, box-shadow 0.3s; /* Agrega una transición para las esquinas y el efecto de relieve */
   position: relative;

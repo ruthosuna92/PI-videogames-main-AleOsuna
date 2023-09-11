@@ -28,7 +28,6 @@ const Home = () => {
 
     const startIndex = (currentPage - 1) * gamesPerPage; //cálculo para el índice de la primera posición en el array de videojuegos, para luego utilizarlo en un slice
     const endIndex = startIndex + gamesPerPage; //cálculo del segundo índice que se le pasa por parámetro al slice, ya que corta una posición antes
-    console.log(allVideogames);
     useEffect(() => {
         
         if(name){
@@ -36,7 +35,7 @@ const Home = () => {
             dispatch(getByName(name))
             .then(() => setIsLoading(false))
             
-
+            
         } else {
             setIsLoading(true);
             dispatch(getAllGames())
@@ -45,13 +44,13 @@ const Home = () => {
             })
         }
     }, [name]);
-
+    
     useEffect(() => {
 
         let juegosFiltrados = [...allVideogames];
-
+        
         if (filtros.orden === 'A') {
-           console.log('entrando a la condicional de orden alfabetico');
+            
             juegosFiltrados = juegosFiltrados.sort((juegoA, juegoB) => juegoA.name.localeCompare(juegoB.name))
             
         }
@@ -70,13 +69,13 @@ const Home = () => {
             juegosFiltrados = juegosFiltrados.sort((a, b) => a.rating - b.rating)
         }
         if (filtros.rating === 'Dr') {
-           
+            
             juegosFiltrados = juegosFiltrados.sort((a, b) => b.rating - a.rating)
         }
         if (filtros.generos.length) {
-
+            
             let juegosFiltradosPorGenero = []
-
+            
             for (let j = 0; j < juegosFiltrados.length; j++) {
                 let generosDelJuego = juegosFiltrados[j].genres.map((a) => a.name)
                 const coincide = filtros.generos.every(gen => generosDelJuego.includes(gen));
@@ -86,12 +85,13 @@ const Home = () => {
             }
             
             juegosFiltrados = juegosFiltradosPorGenero
-
+            
         }
-
+        
         setJuegosFiltradosState(juegosFiltrados);
     }, [filtros, allVideogames])
     
+    console.log(allVideogames);
 
     const handleChange = (e) => {
         if(e.target.name === 'rating'){
@@ -121,15 +121,26 @@ const Home = () => {
         }
     }
     const handleGeneros = (e) => {
-        e.preventDefault()
+        
         console.log(e.target.name);
         setFiltros({
             ...filtros,
             generos: filtros.generos.filter((gen) => gen !== e.target.name)
         })
     }
+    const handleFiltros = (e) => {
+        if (e.target.name === 'generos') {
+            setFiltros({
+                ...filtros,
+                generos: []
+            })
+        }
+        setFiltros({
+            ...filtros,
+            [e.target.name]: ''
+        })
+    }
     const juegosPorPagina = juegosFiltradosState.slice(startIndex, endIndex);
-
     return (
         <div className="home-container">
 
@@ -149,6 +160,7 @@ const Home = () => {
                     <option value="D">Descendente</option>
 
                 </select>
+                <button onClick={handleFiltros} name='orden' className={`neon-button ${filtros.orden !== '' ? 'active' : ''}`}>Reset</button>
                 <p>Filtrar por origen</p>
                 <select name="origen" value={filtros.origen} onChange={handleChange}>
 
@@ -156,12 +168,14 @@ const Home = () => {
                     <option value='Api'>Api</option>
                     <option value='Database'>Database</option>
                 </select>
+                <button onClick={handleFiltros} name='origen' className={`neon-button ${filtros.origen !== '' ? 'active' : ''}`}>Reset</button>
                 <p>Filtrar por rating</p>
                 <select name="rating" value={filtros.rating} onChange={handleChange}>
                     <option value="">Seleccionar rating</option>
                     <option value='Ar'>Ascendente</option>
                     <option value='Dr'>Descendente</option>
                 </select>
+                <button onClick={handleFiltros} name='rating' className={`neon-button ${filtros.rating !== '' ? 'active' : ''}`}>Reset</button>
                 <p>Filtrar por género</p>
                 <select name="generos" onChange={handleChange}>
                     <option value="">Seleccionar género</option>
@@ -197,6 +211,7 @@ const Home = () => {
                             </div>
                         ))}
                 </div>
+                        <button onClick={handleFiltros} name='generos' className={`neon-button ${filtros.generos.length !== 0 ? 'active' : ''}`}>Reset</button>
 
             </div>
             <Paginacion
@@ -204,8 +219,14 @@ const Home = () => {
                 totalPages={Math.ceil(juegosFiltradosState.length / gamesPerPage)}
                 onPageChange={onPageChange}
             />
-            <button>Filtrar</button>
+            
             {/* <div className="ventana"><p>Soy una ventana que se superpone</p></div> */}
+            {allVideogames.length === 0 && !isLoading && (
+  <div className="error-container">
+    <h1 className="error-message">JUEGO NO ENCONTRADO!!</h1>
+    <img className="error-mario" src="https://www.egames.news/__export/1600098643488/sites/debate/img/2020/09/14/mario-head-removebg-preview_crop1600098532376.png_242310155.png" alt="mario" />
+  </div>
+)}
             <div className="cards-container">
                 {!isLoading ? (
                     <Cards juegosFiltradosState={juegosPorPagina} />

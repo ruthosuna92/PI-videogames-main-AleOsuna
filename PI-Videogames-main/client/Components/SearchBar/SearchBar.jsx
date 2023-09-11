@@ -2,7 +2,6 @@
 import './SearchBar.css';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { getByName } from '../../Redux/actions';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { nameSearched } from '../../Redux/actions';
 

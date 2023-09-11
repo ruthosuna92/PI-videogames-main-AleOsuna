@@ -1,17 +1,29 @@
 /* LandingPage.css */
 
-body {
+/* LandingPage.css */
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Cambia la opacidad aquí para ajustar el nivel de oscurecimiento */
+    z-index: -1; /* Asegura que el fondo esté detrás del contenido */
+  }
+  
+  body {
     background-image: url('https://bloges.influence4you.com/wp-content/uploads/2022/11/Die-TOP-20-Gaming-YouTuber-2022-scaled.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
     min-height: 100vh;
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
     margin: 0;
     padding: 0;
-}
+    position: relative; /* Añade posición relativa para que el ::before funcione */
+  }
+  
 .container {
     display: flex;
     justify-content: center;

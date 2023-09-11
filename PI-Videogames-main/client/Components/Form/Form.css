@@ -74,3 +74,49 @@ button {
   vertical-align: top;
   box-sizing: border-box;
 }
+
+.ventana {
+  /* background-color: rgba(0, 0, 0, 0.95); */
+  /* background-color: #3C3C3C; */
+  background-color: black;
+    color: white;
+    padding: 20px;
+    width: 250px;
+    height: 150px;
+    border-radius: 50px; /* Borde redondeado */
+    margin: 0 auto; /* Centra el formulario horizontalmente */
+    margin-top: 100px;
+    display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  border: 2px solid #FF00FF; /* Contorno del botón */
+  color: #FF00FF; /* Texto de color fucsia */
+  box-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF, 0 0 30px #FF00FF;
+}
+.neon-button {
+  background-color: transparent;
+  border: 2px solid #FF00FF; /* Contorno del botón */
+  color: #FF00FF; /* Texto de color fucsia */
+  font-size: 16px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s, text-shadow 0.3s; /* Efecto de neon */
+  outline: none;
+}
+
+.neon-button:hover {
+  background-color: #FF00FF; /* Cambio de color de fondo al hacer hover */
+  color: #FFFFFF; /* Cambio de color del texto al hacer hover */
+  box-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF, 0 0 30px #FF00FF; /* Efecto de neon al hacer hover */
+  text-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF, 0 0 30px #FF00FF; /* Efecto de neon para el texto al hacer hover */
+}
+.check {
+  filter: brightness(1.7);
+  width: 100px;
+}
+.error {
+  width: 60px;
+}

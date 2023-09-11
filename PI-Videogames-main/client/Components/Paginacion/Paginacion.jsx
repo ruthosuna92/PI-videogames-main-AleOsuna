@@ -6,10 +6,6 @@ const Paginacion = ({ currentPage, totalPages, onPageChange }) => {
   Array.from({ length: (stop - start) / step + 1 }, (_, i) => start + i * step);
   const pageNumbers = range(1, totalPages, 1)
 
-
-
-  console.log(totalPages);
-
   return (
     <div className="pagination-container">
       {pageNumbers.map((number) => (

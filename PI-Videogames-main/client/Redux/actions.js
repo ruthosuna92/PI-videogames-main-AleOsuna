@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { GET_ALL, GET_BY_ID, GET_BY_NAME, CREATE_VIDEOGAME, NAME_SEARCHED} from './actions-types'
+import { GET_ALL, GET_BY_ID, GET_BY_NAME, CREATE_VIDEOGAME, NAME_SEARCHED, CLEAN, ERROR_VIDEOGAME} from './actions-types'
 
 export const getAllGames = () => {
     return async (dispatch) => {
@@ -58,7 +58,17 @@ export const postVideogame = (videogame) => {
          payload: data
        });
      } catch (err) {
-       console.log(err);
+      return dispatch({
+         type: ERROR_VIDEOGAME,
+         payload: await err.response.data
+      })
+      // console.log(err.response.data)
+
+      // return async (dispatch) =>{
+      //    return dispatch({
+      //    type: ERROR_VIDEOGAME,
+      //    payload: err.response.data
+      //  })}
      }
    };
 
@@ -68,6 +78,12 @@ export const nameSearched = (name) => {
    return {
       type: NAME_SEARCHED,
       payload: name
+   }
+}
+export const clean = () => {
+   return {
+      type: CLEAN,
+      payload: ''
    }
 }
 
