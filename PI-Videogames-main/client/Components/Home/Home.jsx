@@ -26,8 +26,9 @@ const Home = () => {
         setCurrentPage(pageNumber);
     };
 
-    const startIndex = (currentPage - 1) * gamesPerPage; //cálculo para el índice de la primera posición en el array de videojuegos, para luego utilizarlo en un slice
-    const endIndex = startIndex + gamesPerPage; //cálculo del segundo índice que se le pasa por parámetro al slice, ya que corta una posición antes
+    const startIndex = (currentPage - 1) * gamesPerPage; 
+    const endIndex = startIndex + gamesPerPage;
+
     useEffect(() => {
         
         if(name){
@@ -219,8 +220,6 @@ const Home = () => {
                 totalPages={Math.ceil(juegosFiltradosState.length / gamesPerPage)}
                 onPageChange={onPageChange}
             />
-            
-            {/* <div className="ventana"><p>Soy una ventana que se superpone</p></div> */}
             {allVideogames.length === 0 && !isLoading && (
   <div className="error-container">
     <h1 className="error-message">JUEGO NO ENCONTRADO!!</h1>
