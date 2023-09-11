@@ -6,9 +6,7 @@ const axios = require('axios')
 
 
 module.exports = async (idVideogame) => {
-
     try {
-        
         if (isNaN(Number(idVideogame))) {
             const videogameDetailBD  = await Videogame.findOne({
                 where: {id: idVideogame},
@@ -29,9 +27,7 @@ module.exports = async (idVideogame) => {
             return videogameDetailApi
             //return videogameDetailBD
         }
-
     } catch (error) {
         throw new Error(error.message)
     }
-
 }
