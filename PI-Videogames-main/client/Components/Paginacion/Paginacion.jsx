@@ -6,13 +6,15 @@ const Paginacion = ({ currentPage, totalPages, onPageChange }) => {
     Array.from({ length: (stop - start) / step + 1 }, (_, i) => start + i * step);
   const pageNumbers = range(1, totalPages, 1)
   console.log(pageNumbers.slice(4))
-  // si current es igual o mayor a length - 2 entonces botonesNum va a ser igual a pageNumbers.slice(pageNumbers.length - 3)
+
   let buttonsPerRender = 3
   let startIndex = currentPage - 1
   let endIndex = startIndex + buttonsPerRender
+
   const botones = (pageNumbers) => {
 
     let botonesNum = null
+
     if (currentPage >= pageNumbers.length - 2) {
       botonesNum = pageNumbers.slice(pageNumbers.length - 3)
       return botonesNum
@@ -20,6 +22,7 @@ const Paginacion = ({ currentPage, totalPages, onPageChange }) => {
       botonesNum = pageNumbers.slice(startIndex, endIndex);
       return botonesNum
     }
+
   }
   const handlePage = (e) => {
     if (e.target.name === 'button') {
@@ -63,7 +66,7 @@ const Paginacion = ({ currentPage, totalPages, onPageChange }) => {
       {currentPage < pageNumbers.length - 2 && <button name='next' onClick={handlePage} className='neon-button'>Next</button>}
       {currentPage < pageNumbers.length - 2 && <button name='last' onClick={handlePage} className='neon-button'>Last</button>}
       </div>
-      <p className='texto'>Página {currentPage} de {totalPages} </p>
+      {pageNumbers.length> 1 &&<p className='texto'> Página {currentPage} de {totalPages} </p>}
     </div>
   );
 };
