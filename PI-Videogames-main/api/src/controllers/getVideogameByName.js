@@ -7,7 +7,6 @@ const {Op}= require('sequelize')
 
 
 module.exports = async (nameVideogame) => {
-
     try {
         const nameLow = nameVideogame.toLowerCase()
         const videogameNameBD = await Videogame.findAll({
@@ -33,9 +32,8 @@ module.exports = async (nameVideogame) => {
         })
         console.log(videogameNameBD);
         return [...videogameNameBD, ...videogameName].slice(0, 15)
-        //return videogameDetailBD
+        
     }
-
     catch (error) {
     throw new Error(error.message)
 }

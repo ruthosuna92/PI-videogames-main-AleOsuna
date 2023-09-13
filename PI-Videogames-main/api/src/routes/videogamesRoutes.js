@@ -3,24 +3,11 @@ const getVideogames = require('../controllers/getVideogames')
 const getVideogameById = require('../controllers/getVideogameById')
 const getVideogameByName = require('../controllers/getVideogameByName')
 const postVideogame = require('../controllers/postVideogame')
-// Importar todos los routers;
-// Ejemplo: const authRouter = require('./auth.js');
+const putVideogame = require('../controllers/putVideogame')
 const videogamesRoutes = Router();
-const { Videogame, Genre } = require('../db')
 
 
-// videogamesRoutes.get('/', async (req, res)=>{
-//     try {
-//         const {name} = req.query
-//         if(!name) await res.status(200).json(`Ruta get respondiendo con 100 videojuegos`)
-        
-//         res.status(200).json(`Ruta get query ${name} respondiendo`)
-        
-//     } catch (error) {
-//         console.log(error);
-//     }
-    
-// })
+
 
 videogamesRoutes.get('/', async (req, res)=>{
     const {name} = req.query
@@ -44,7 +31,7 @@ videogamesRoutes.get('/:idVideogame', async (req, res)=>{
     try {
         if(idVideogame){
             
-            const resp = await getVideogameById(Number(idVideogame))
+            const resp = await getVideogameById(idVideogame)
             console.log(resp);
             return res.status(200).json(resp)
         }
@@ -53,12 +40,7 @@ videogamesRoutes.get('/:idVideogame', async (req, res)=>{
         res.status(500).json(error.message);
     }
 })
-// let persona = {
-//     altura: 1.6 ,
-//     peso: '60 kg',
-//     nombre: 'Mauricio Zuluaga',
-//     caracteristicas: ['barba', 'come mucho', 'es cansonsito', 'duerme 40 horas', 'come tripas de pollo']
-// }
+
 videogamesRoutes.post('/', async (req, res) => {
     try {
         const {name, background_image, genres, description, platforms, rating, released} = req.body
@@ -73,6 +55,20 @@ videogamesRoutes.post('/', async (req, res) => {
     }
 })
 
+videogamesRoutes.put('/', async (req, res) => {
+    try {
+        const {id, name, background_image, genres, description, platforms, rating, released} = req.body
+        if(!id && !name && !background_image || !genres || !description || !platforms || !rating || !released){
+            res.status(404).send('Ingrese la información correcta')
+        } else {
+
+            const resp = await putVideogame(id, name, background_image, genres, description, platforms, rating, released)
+            res.status(200).json(resp)
+        }        
+    } catch (error) {
+        res.status(500).json(error.message)
+    }
+})
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 

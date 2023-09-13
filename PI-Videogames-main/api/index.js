@@ -26,15 +26,13 @@ const axios = require('axios')
 
 
 // Syncing all the models at once.
-conn.sync({ force: true}).then(() => {
+conn.sync({ force: false}).then(() => {
   server.listen(3002, async () => {
     try {
       const {results} = (await axios(`https://api.rawg.io/api/genres?key=${API_KEY}`)).data
       results.map(async (gen)=> await Genre.findOrCreate({where: {name: gen.name}}))
-      
-
     } catch (error) {
-      console.log(error)
+      throw new Error('Los géneros no pudieron ser creados')
     }
     console.log('%s listening at 3002'); // eslint-disable-line no-console
   });
