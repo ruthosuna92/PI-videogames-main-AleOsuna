@@ -7,6 +7,7 @@ import "./Form.css";
 const Form = () => {
   const postResponse = useSelector((state) => state.postResponse);
   const errorResponse = useSelector((state) => state.errorResponse)
+  const genres = useSelector((state) => state.allGenres)
   const dispatch = useDispatch();
   console.log(postResponse);
   const [errors, setErrors] = useState({});
@@ -27,7 +28,8 @@ const Form = () => {
     platforms: false,
     rating: false,
     released: false,
-  }); // Estado para rastrear el input enfocado
+  }); 
+  
   const [onBlurInput, setOnBlurInput] = useState({
     name: false,
     background_image: false,
@@ -37,6 +39,7 @@ const Form = () => {
     rating: false,
     released: false,
   })
+  
   const [creating, setCreating] = useState(false)
   console.log(focusedInput);
   const handleChange = (e) => {
@@ -200,25 +203,10 @@ const Form = () => {
         <select name="genres" onChange={handleChange}
           onFocus={handleInputFocus}
           onBlur={handleOnBlur}>
-          <option value="Action">Action</option>
-          <option value="Adventure">Adventure</option>
-          <option value="Indie">Indie</option>
-          <option value="RPG">RPG</option>
-          <option value="Strategy">Strategy</option>
-          <option value="Shooter">Shooter</option>
-          <option value="Casual">Casual</option>
-          <option value="Simulation">Simulation</option>
-          <option value="Puzzle">Puzzle</option>
-          <option value="Arcade">Arcade</option>
-          <option value="Platformer">Platformer</option>
-          <option value="Massively Multiplayer">Massively Multiplayer</option>
-          <option value="Racing">Racing</option>
-          <option value="Sports">Sports</option>
-          <option value="Fighting">Fighting</option>
-          <option value="Family">Family</option>
-          <option value="Board Games">Board Games</option>
-          <option value="Educational">Educational</option>
-          <option value="Card">Card</option>
+          {genres && genres.map((gen)=>{
+                        console.log(gen.name);
+                        return <option value={gen.name}>{gen.name}</option>
+                    })}
         </select>
         <div className="container-genres">
           {created.genres &&

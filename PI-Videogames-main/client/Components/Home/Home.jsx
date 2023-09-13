@@ -9,6 +9,7 @@ import Paginacion from '../Paginacion/Paginacion';
 
 const Home = () => {
     const allVideogames = useSelector((state) => state.allVideogames) // me traigo los videojuegos que guardé en el estado global
+    const genres = useSelector((state) => state.allGenres)
     const name = useSelector((state) => state.nameSearched)
     const dispatch = useDispatch()
     const [filtros, setFiltros] = useState({ // estado local para los filtros
@@ -84,9 +85,7 @@ const Home = () => {
                     juegosFiltradosPorGenero.push(juegosFiltrados[j])
                 }
             }
-            
             juegosFiltrados = juegosFiltradosPorGenero
-            
         }
         
         setJuegosFiltradosState(juegosFiltrados);
@@ -180,25 +179,10 @@ const Home = () => {
                 <p>Filtrar por género</p>
                 <select name="generos" onChange={handleChange}>
                     <option value="">Seleccionar género</option>
-                    <option value="Action">Action</option>
-                    <option value="Adventure">Adventure</option>
-                    <option value="Indie">Indie</option>
-                    <option value="RPG">RPG</option>
-                    <option value="Strategy">Strategy</option>
-                    <option value="Shooter">Shooter</option>
-                    <option value="Casual">Casual</option>
-                    <option value="Simulation">Simulation</option>
-                    <option value="Puzzle">Puzzle</option>
-                    <option value="Arcade">Arcade</option>
-                    <option value="Platformer">Platformer</option>
-                    <option value="Massively Multiplayer">Massively Multiplayer</option>
-                    <option value="Racing">Racing</option>
-                    <option value="Sports">Sports</option>
-                    <option value="Fighting">Fighting</option>
-                    <option value="Family">Family</option>
-                    <option value="Board Games">Board Games</option>
-                    <option value="Educational">Educational</option>
-                    <option value="Card">Card</option>
+                    {genres && genres.map((gen)=>{
+                        console.log(gen.name);
+                        return <option value={gen.name}>{gen.name}</option>
+                    })}
                 </select>
 
                 <div className="selected-genres-container">

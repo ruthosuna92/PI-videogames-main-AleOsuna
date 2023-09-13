@@ -1,5 +1,20 @@
 import axios from 'axios'
-import { GET_ALL, GET_BY_ID, GET_BY_NAME, CREATE_VIDEOGAME, NAME_SEARCHED, CLEAN, ERROR_VIDEOGAME} from './actions-types'
+import { GET_ALL, GET_BY_ID, GET_BY_NAME, CREATE_VIDEOGAME, NAME_SEARCHED, CLEAN, ERROR_VIDEOGAME, GET_ALL_GENRES} from './actions-types'
+
+export const getAllGenres = () => {
+   return async (dispatch) => {
+      try {
+         const endpoint = 'http://localhost:3002/genres';
+         const response = await axios.get(endpoint)
+            return dispatch({
+               type: GET_ALL_GENRES,
+               payload: response.data,
+            });
+      } catch (error) {
+         console.log(error);
+      }
+   }
+}
 
 export const getAllGames = () => {
     return async (dispatch) => {

@@ -1,7 +1,8 @@
-import { GET_ALL, GET_BY_ID, GET_BY_NAME, CREATE_VIDEOGAME, NAME_SEARCHED, CLEAN, ERROR_VIDEOGAME} from "./actions-types"
+import { GET_ALL, GET_BY_ID, GET_BY_NAME, CREATE_VIDEOGAME, NAME_SEARCHED, CLEAN, ERROR_VIDEOGAME, GET_ALL_GENRES} from "./actions-types"
 
 const initialState = {
     allVideogames: [],
+    allGenres: [],
     videogameDetail: {},
     postResponse: '',
     errorResponse: '',
@@ -14,6 +15,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 allVideogames: action.payload
+            }
+        case GET_ALL_GENRES:
+            return {
+                ...state,
+                allGenres: action.payload
             }
         case GET_BY_ID:
             return {

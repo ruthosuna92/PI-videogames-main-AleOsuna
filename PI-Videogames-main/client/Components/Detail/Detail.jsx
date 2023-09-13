@@ -8,7 +8,7 @@ const Detail = () => {
   const id = useParams().id;
   const videogameDetail = useSelector((state) => state.videogameDetail);
   const dispatch = useDispatch();
-
+  console.log(videogameDetail);
   useEffect(() => {
     dispatch(getById(id));
   }, [id]);
@@ -18,12 +18,13 @@ const Detail = () => {
     <div className="detail-left">
       <img
         className="detail-image"
-        src={videogameDetail?.background_image}
-        alt={videogameDetail?.name}
+        src={videogameDetail?.background_image && videogameDetail?.background_image}
+        alt={videogameDetail?.name && videogameDetail?.name}
       />
-      <p>Plataformas: {videogameDetail?.platforms && videogameDetail?.platforms.join(', ')}</p>
+      <p>Plataformas: {videogameDetail?.platforms && videogameDetail?.platforms}</p>
       <p>Géneros: {videogameDetail?.genres && videogameDetail?.genres?.join(', ')}</p>
       <p>Rating: {videogameDetail.rating && videogameDetail.rating}</p>
+      <p>Lanzamiento: {videogameDetail.released && videogameDetail.released}</p>
     </div>
     <div className="detail-right">
       <p>{videogameDetail?.name && videogameDetail?.name}</p>
