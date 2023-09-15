@@ -47,8 +47,7 @@ module.exports = async (id, name, background_image, genres, description, platfor
         released: gameUpdated.released
     };
   } catch (error) {
-    console.error('Error al actualizar el videojuego:', error.message);
-    throw error; // Re-lanzar el error para manejarlo en el nivel superior.
+    throw error; 
   }
 };
 

@@ -4,6 +4,7 @@ const getVideogameById = require('../controllers/getVideogameById')
 const getVideogameByName = require('../controllers/getVideogameByName')
 const postVideogame = require('../controllers/postVideogame')
 const putVideogame = require('../controllers/putVideogame')
+const deleteVideogame = require('../controllers/deleteVideogame')
 const videogamesRoutes = Router();
 
 
@@ -69,6 +70,16 @@ videogamesRoutes.put('/', async (req, res) => {
         res.status(500).json(error.message)
     }
 })
+videogamesRoutes.delete('/:idVideogame', async (req, res) => {
+    try {
+      const { idVideogame } = req.params;
+        const resp = await deleteVideogame(idVideogame)
+      res.status(200).send(resp); 
+    } catch (error) {
+      console.error('Error al eliminar el videojuego:', error.message);
+      res.status(500).json({ message: 'Error interno del servidor.' });
+    }
+  });
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 

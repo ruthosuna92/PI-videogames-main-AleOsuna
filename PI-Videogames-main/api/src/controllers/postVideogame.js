@@ -19,7 +19,7 @@ module.exports = async (name, background_image, genres, description, platforms, 
         }))
         return 'Videojuego creado exitosamente'
     } catch (error) {
-        throw Error
+        throw error
     }
 }
 

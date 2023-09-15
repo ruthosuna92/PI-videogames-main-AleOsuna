@@ -7,6 +7,7 @@ const axios = require('axios')
 
 module.exports = async (idVideogame) => {
     try {
+        if(!idVideogame) throw new Error('No se encuentra el id')
         if (isNaN(Number(idVideogame))) {
             const videogameDetailBD  = await Videogame.findOne({
                 where: {id: idVideogame},        
@@ -27,7 +28,8 @@ module.exports = async (idVideogame) => {
                 released: videogameDetailBD.released
             };
         } else {
-            const { id, name, background_image, platforms, description, rating, genres } = (await axios(`https://api.rawg.io/api/games/${idVideogame}?key=${API_KEY}`)).data
+            const { id, name, background_image, platforms, description, rating, genres, released } = (await axios(`https://api.rawg.io/api/games/${idVideogame}?key=${API_KEY}`)).data
+
             const videogameDetailApi = {
                 id, 
                 name, 
@@ -39,9 +41,8 @@ module.exports = async (idVideogame) => {
                 released
             }
             return videogameDetailApi
-            
         }
     } catch (error) {
-        throw new Error(error.message)
+        throw error
     }
 }

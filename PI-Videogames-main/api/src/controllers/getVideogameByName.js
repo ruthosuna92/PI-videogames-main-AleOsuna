@@ -8,6 +8,7 @@ const {Op}= require('sequelize')
 
 module.exports = async (nameVideogame) => {
     try {
+        
         const nameLow = nameVideogame.toLowerCase()
         const videogameNameBD = await Videogame.findAll({
             where: { name: {[Op.iLike]: `%${nameLow}%` } },
@@ -35,7 +36,7 @@ module.exports = async (nameVideogame) => {
         
     }
     catch (error) {
-    throw new Error(error.message)
+    throw error
 }
 
 }
