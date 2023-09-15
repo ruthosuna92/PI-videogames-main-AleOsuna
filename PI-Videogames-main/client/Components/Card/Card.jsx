@@ -1,4 +1,3 @@
-// Tu componente Card.js
 import './Card.css';
 import { NavLink } from 'react-router-dom';
 

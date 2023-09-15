@@ -1,5 +1,3 @@
-/* Agrega estas clases a tu archivo de estilos CSS */
-
 .all-buttons {
     display: flex;
     justify-content: center;
@@ -10,28 +8,37 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-  
+    align-items: center;  
    margin-left: 300px;
-   
+}
+.boton-next {
+    width: 10px;
+}
+.boton-prev {
+    transform: scaleX(-1);
+    width: 10px;
+}
+.boton-last {
+    /* filter: brightness(150%) hue-rotate(300deg); */
+    width: 20px;
 }
 
 .neon-button {
     background-color: transparent;
-    border: 2px solid #FF00FF; /* Color del contorno del botón */
-    color: #FF00FF; /* Color del texto del botón */
-    font-size: 18px;
+    border: 2px solid #FF00FF;
+    color: #FF00FF;
+    font-size: 15px;
     padding: 8px 15px;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
     outline: none;
 }
 
 .neon-button.active {
-    background-color: #FF00FF; /* Cambio de color de fondo para el botón activo */
-    color: #FFFFFF; /* Cambio de color del texto para el botón activo */
-    box-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF, 0 0 30px #FF00FF; /* Efecto de neón para el botón activo */
+    background-color: #FF00FF; 
+    color: #FFFFFF;
+    box-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF, 0 0 30px #FF00FF; 
 }
 
 .texto {
@@ -43,7 +50,6 @@
     gap: 10px;
 }
 
-/* Agrega una clase para establecer un ancho fijo a los botones de números */
 .number-button {
-    width: 40px; /* Ajusta el ancho según tus necesidades */
+    width: 40px;
 }

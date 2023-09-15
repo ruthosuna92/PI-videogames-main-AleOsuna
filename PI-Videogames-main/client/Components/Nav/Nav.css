@@ -1,5 +1,3 @@
-/* Nav.css */
-
 .nav-container {
     background-color: #000; 
     display: flex;
@@ -10,29 +8,47 @@
     top: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.8); /* Fondo con transparencia (ajusta el valor alpha según lo desees) */
-    z-index: 1000; /* Asegura que la barra esté por encima del contenido */
-    
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000; 
   }
   
   .neon-button {
     background-color: transparent;
-    border: 2px solid #FF00FF; /* Contorno del botón */
-    color: #FF00FF; /* Texto de color fucsia */
+    border: 2px solid #FF00FF;
+    color: #FF00FF;
     font-size: 16px;
     padding: 5px 10px;
-    border-radius: 5px;
+    
     cursor: pointer;
-    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s, text-shadow 0.3s; /* Efecto de neon */
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s, text-shadow 0.3s;
     outline: none;
   }
-  
+  .reset {
+    width: 50px;
+  }
   .neon-button:hover {
-    background-color: #FF00FF; /* Cambio de color de fondo al hacer hover */
-    color: #FFFFFF; /* Cambio de color del texto al hacer hover */
-    box-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF, 0 0 30px #FF00FF; /* Efecto de neon al hacer hover */
-    text-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF, 0 0 30px #FF00FF; /* Efecto de neon para el texto al hacer hover */
+    background-color: #FF00FF; 
+    color: #FFFFFF;
+    box-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF, 0 0 30px #FF00FF; 
+    text-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF, 0 0 30px #FF00FF;
+  }
+  .neon-button-home {
+    background-color: transparent;
+   
+    font-size: 16px;
+    margin: -15px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s, text-shadow 0.3s;
+    outline: none;
+  }
+  .neon-button-home:hover {
+    background-color: #FF00FF;
+    color: #FFFFFF;
+    box-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF, 0 0 30px #FF00FF; 
+    text-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF, 0 0 30px #FF00FF;
+    margin: -15px;
   }
   .neon-link {
-    text-decoration: none; /* Quitar la línea de enlace */
+    text-decoration: none;
   }  

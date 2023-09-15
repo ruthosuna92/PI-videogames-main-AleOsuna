@@ -6,13 +6,16 @@ const regexSpace = /^(?!.*  )[^ ].*$/
 const regexURL = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/
 
 
-export const validations = (created) => {
+export const validations = (created, game) => {
     let errors = {}
-    if(!regexName.test(created.name)){
+    if(!regexName.test(created.name) || !created.name){
         errors.eName = 'Por favor ingrese un nombre'
     }
     if(!regexLength.test(created.name)){
         errors.eName2 = 'Debe tener mínimo 5 caracteres, máximo 255'
+    }
+    if(game){
+        errors.eName3 = 'Este nombre de videojuego ya existe!!'
     }
     if(!created.description){
         errors.eDescription = 'Por favor ingrese una descripción'
@@ -32,7 +35,7 @@ export const validations = (created) => {
     if(!regexRating.test(created.rating)){
         errors.eRating2 = 'Ingrese un rating válido con dos decimales'
     }
-    if(!created.genres.length){
+    if(created.genres.length === 0){
         errors.eGenres1 = 'Por favor seleccione al menos un género'
     }
     if(!regexURL.test(created.background_image)){

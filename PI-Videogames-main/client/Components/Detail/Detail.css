@@ -1,59 +1,53 @@
 .detail-container {
-    background-color: rgba(0, 0, 0, 0.8); /* Fondo negro más oscuro */
-    border-radius: 10px; /* Esquinas redondeadas */
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
     display: flex;
-    width: 70%; /* Ancho del contenedor, ajusta según sea necesario */
-    margin: 80px auto 0; /* Centra horizontalmente */
-    padding: 10px; /* Espacio interior general */
+    width: 70%; 
+    margin: 80px auto 0;
+    padding: 10px; 
     
   }
   
   .detail-image {
-    flex: 1; /* Toma la mitad del espacio disponible */
-    padding: 20px; /* Espacio interior para la imagen */
+    flex: 1; 
+    padding: 20px;
   }
   
   .detail-info {
-    flex: 1; /* Toma la otra mitad del espacio disponible */
-    padding: 20px; /* Espacio interior para la información */
-    color: white; /* Color del texto */
+    flex: 1; 
+    padding: 20px;
+    color: white; 
   }
   
   .detail-image img {
     max-width: 100%;
-    border-radius: 10px; /* Esquinas redondeadas para la imagen */
+    border-radius: 10px;
   }
   
   .detail-container {
-    background-color: rgba(0, 0, 0, 0.8); /* Fondo negro más oscuro */
-    border-radius: 80px; /* Esquinas redondeadas */
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 80px;
     display: flex;
-    width: 80%; /* Ancho del contenedor, ajusta según sea necesario */
-    margin: 60px auto 0; /* Margen superior para dejar espacio a la barra de navegación */
-    padding: 10px; /* Espacio interior general */
+    width: 80%;
+    margin: 60px auto 0;
+    padding: 10px;
   }
   
   .detail-left {
-    flex: 1; /* Ocupa todo el espacio disponible en el lado izquierdo */
-    padding: 30px; /* Espacio interior para el contenido izquierdo */
+    flex: 1;
+    padding: 30px;
     color: white;
     
   }
   
   .detail-image {
-    max-width: 100%; /* Ajusta el tamaño de la imagen para que quepa en su contenedor */
-    border-radius: 50px; /* Esquinas redondeadas para la imagen */
+    max-width: 100%;
+    border-radius: 50px;
   }
   
   .detail-right {
-    flex: 1; /* Ocupa todo el espacio disponible en el lado derecho */
-    padding: 30px; /* Espacio interior para el contenido derecho */
-    color: white; /* Color del texto en el lado derecho */
+    flex: 1;
+    padding: 30px;
+    color: white;
   }
-
-  
-  
-  /* Resto de tus estilos */
-
-  
   

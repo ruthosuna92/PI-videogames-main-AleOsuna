@@ -13,7 +13,7 @@ const LandingPage = () => {
     
     return (
         <div className='container'>
-            <NavLink to='/home' className="button-neon"> Home </NavLink> 
+            <NavLink to='/home' className="button-neon"><img className='imagen-play' src='https://png.pngtree.com/png-clipart/20230407/ourmid/pngtree-neon-play-button-glowing-glassmorphism-icons-png-image_6689730.png'/></NavLink> 
            
         </div>
     )

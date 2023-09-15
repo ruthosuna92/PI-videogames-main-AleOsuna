@@ -16,18 +16,17 @@ const Nav = () => {
     return (
         <div className="nav-container">
             {location !== '/home' && (
-                <button className="neon-button">
-                    <NavLink to='/home' className="neon-link">Home</NavLink>
+                <button className="neon-button-home">
+                    <NavLink to='/home' className="neon-link"><img className='reset'src='https://dbdzm869oupei.cloudfront.net/img/sticker/preview/37876.png'/></NavLink>
                 </button>
             )}
-            <button className="neon-button">
-                <NavLink to='/form' className="neon-link">Create</NavLink>
-            </button>
             {location === '/home' && (
-                <button className="neon-button" onClick={handleClick}>
-                    Reset
-                </button>
+                <button className="neon-button-home" onClick={handleClick}>
+                    <img className='reset'src='https://dbdzm869oupei.cloudfront.net/img/sticker/preview/37876.png'/></button>
             )}
+           { location !=='/form' && <button className="neon-button">
+                <NavLink to='/form' className="neon-link">Crear</NavLink>
+            </button>}
             <SearchBar />
         </div>
     );

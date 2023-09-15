@@ -5,7 +5,6 @@ const Paginacion = ({ currentPage, totalPages, onPageChange }) => {
   const range = (start, stop, step) =>
     Array.from({ length: (stop - start) / step + 1 }, (_, i) => start + i * step);
   const pageNumbers = range(1, totalPages, 1)
-  console.log(pageNumbers.slice(4))
 
   let buttonsPerRender = 3
   let startIndex = currentPage - 1
@@ -22,7 +21,6 @@ const Paginacion = ({ currentPage, totalPages, onPageChange }) => {
       botonesNum = pageNumbers.slice(startIndex, endIndex);
       return botonesNum
     }
-
   }
   const handlePage = (e) => {
     if (e.target.name === 'button') {
@@ -46,8 +44,8 @@ const Paginacion = ({ currentPage, totalPages, onPageChange }) => {
   return (
     <div className="pagination-container">
       <div className='all-buttons'>
-      {currentPage > 3 && <button name='first' onClick={handlePage} className='neon-button'>First</button>}
-      {currentPage > 1 && <button name='prev' onClick={handlePage} className='neon-button'>Prev</button>}
+      {currentPage > 3 && <button name='first' onClick={handlePage} className='neon-button'>Primera</button>}
+      {currentPage > 1 && <button name='prev' onClick={handlePage} className='neon-button'><img className='boton-prev'src='https://static.vecteezy.com/system/resources/previews/018/745/838/original/neon-pink-arrow-png.png'/></button>}
       <div className='buttons-container'>
         {botones(pageNumbers).map((number, i) => (
           <button
@@ -63,8 +61,8 @@ const Paginacion = ({ currentPage, totalPages, onPageChange }) => {
         ))}
 
       </div>
-      {currentPage < pageNumbers.length - 2 && <button name='next' onClick={handlePage} className='neon-button'>Next</button>}
-      {currentPage < pageNumbers.length - 2 && <button name='last' onClick={handlePage} className='neon-button'>Last</button>}
+      {currentPage < pageNumbers.length - 2 && <button name='next' onClick={handlePage} className='neon-button'><img className='boton-next'src='https://static.vecteezy.com/system/resources/previews/018/745/838/original/neon-pink-arrow-png.png'/></button>}
+      {currentPage < pageNumbers.length - 2 && <button name='last' onClick={handlePage} className='neon-button'>Última</button>}
       </div>
       {pageNumbers.length> 1 &&<p className='texto'> Página {currentPage} de {totalPages} </p>}
     </div>

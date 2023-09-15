@@ -1,12 +1,10 @@
-/* Form.css */
-
 .form-container {
     background-color: rgba(0, 0, 0, 0.8);
     color: white;
     padding: 20px;
     width: 300px;
-    border-radius: 10px; /* Borde redondeado */
-    margin: 0 auto; /* Centra el formulario horizontalmente */
+    border-radius: 10px; 
+    margin: 0 auto; 
     margin-top: 100px;
 }
 
@@ -26,18 +24,18 @@ button {
     margin-bottom: 10px;
     padding: 5px;
     border: none;
-    border-radius: 5px;
+    
 }
 
 .error-text {
-    color: red; /* Color de texto rojo para errores */
-    font-size: 12px; /* Tamaño de fuente más pequeño para errores */
+    color: red; 
+    font-size: 12px; 
     margin-top: -10px;
 }
 
 .success-text {
-    color: limegreen; /* Color de texto verde para éxito */
-    font-size: 16px; /* Tamaño de fuente más grande para éxito */
+    color: limegreen; 
+    font-size: 16px; 
 }
 
 .neon-input {
@@ -52,10 +50,8 @@ button {
   }
   
   .neon-input:focus {
-    /* background-color: #FF00FF; */
     color: #FFFFFF;
     box-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF, 0 0 30px #FF00FF;
-    /* text-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF, 0 0 30px #FF00FF; */
   }
   .eliminar-button {
     background: transparent;
@@ -64,7 +60,7 @@ button {
     outline: none;
 }
 .eliminar-icon {
-    width: 12px; /* Ajusta el tamaño de la imagen de la lupa según sea necesario */
+    width: 12px; 
     height: 12px;
   }
 .container-genres {
@@ -83,35 +79,44 @@ button {
     padding: 20px;
     width: 250px;
     height: 150px;
-    border-radius: 50px; /* Borde redondeado */
-    margin: 0 auto; /* Centra el formulario horizontalmente */
+    border-radius: 50px; 
+    margin: 0 auto; 
     margin-top: 100px;
     display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   position: absolute;
-  border: 2px solid #FF00FF; /* Contorno del botón */
-  color: #FF00FF; /* Texto de color fucsia */
+  border: 2px solid #FF00FF; 
+  color: #FF00FF; 
   box-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF, 0 0 30px #FF00FF;
 }
 .neon-button {
   background-color: transparent;
-  border: 2px solid #FF00FF; /* Contorno del botón */
-  color: #FF00FF; /* Texto de color fucsia */
+  border: 2px solid #FF00FF; 
+  color: #FF00FF; 
   font-size: 16px;
   padding: 5px 10px;
-  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s, text-shadow 0.3s; /* Efecto de neon */
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s, text-shadow 0.3s; 
   outline: none;
 }
 
 .neon-button:hover {
-  background-color: #FF00FF; /* Cambio de color de fondo al hacer hover */
-  color: #FFFFFF; /* Cambio de color del texto al hacer hover */
-  box-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF, 0 0 30px #FF00FF; /* Efecto de neon al hacer hover */
-  text-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF, 0 0 30px #FF00FF; /* Efecto de neon para el texto al hacer hover */
+  background-color: #FF00FF; 
+  color: #FFFFFF; 
+  box-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF, 0 0 30px #FF00FF; 
+  text-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF, 0 0 30px #FF00FF;
+}
+
+.disabled-button {
+  background-color: transparent;
+  border: 2px solid #707070; 
+  color: white;
+  font-size: 16px;
+  padding: 5px 10px;
+  border-radius: 25%;
+  outline: none;
 }
 .check {
   filter: brightness(1.7);
@@ -119,4 +124,22 @@ button {
 }
 .error {
   width: 60px;
+}
+
+::placeholder {
+  font-style: italic;
+  color: #666;
+  font-size: 14px;
+}
+
+input::placeholder {
+  font-size: 14px;
+  font-style: italic;
+  color: #666;
+}
+
+textarea::placeholder {
+  font-style: italic;
+  color: #666;
+  font-size: 14px;
 }

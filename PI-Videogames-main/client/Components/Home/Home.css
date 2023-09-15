@@ -69,22 +69,23 @@
   border-radius: 50%;
   animation: neon 1s linear infinite, rotate 2s linear infinite; /* Agrega animación de neon y rotación */
 }
-.neon-button {
+.filtros-neon-button {
   background-color: transparent;
   border: 2px solid #FF00FF; /* Contorno del botón */
+  border-radius: 8px;
   color: #FF00FF; /* Texto de color fucsia */
-  font-size: 16px;
-  padding: 5px 10px;
-  border-radius: 5px;
+  font-size: 11px;
+  padding: 2px 5px;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s, box-shadow 0.3s, text-shadow 0.3s; /* Efecto de neon */
   outline: none;
 }
-.neon-button.active {
+.filtros-neon-button.active {
   background-color: #FF00FF; /* Cambio de color de fondo para el botón activo */
   color: #FFFFFF; /* Cambio de color del texto para el botón activo */
   box-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF, 0 0 30px #FF00FF; /* Efecto de neón para el botón activo */
 }
+
 .error-container {
   display: flex;
   flex-direction: column;
@@ -93,11 +94,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 999;
-  margin: 0
-  
+  margin-left: 260px
 }
 
 .error-message {
@@ -106,15 +103,17 @@
   text-align: center;
   margin-bottom: 0px;
   margin-top: 150px;
-  margin-left: 20%;
+  margin-left: 100px;
 }
 
 .error-mario {
-  width: 600px; /* Tamaño de la imagen de Mario */
-  height: auto;
-  margin-top: auto;
-  margin-bottom: 0;
-  margin-left: auto;
+  
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 1px;
+    z-index: 999;
+  width: 800px;
   
 }
 @keyframes neon {
@@ -135,13 +134,11 @@
   }
 }
 select {
-  background-color: rgba(0, 0, 0, 0.8); /* Fondo negro transparente */
-  color: white; /* Texto blanco */
-  border: 2px solid #FF00FF; /* Borde fucsia neon */
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  border: 2px solid #FF00FF;
   border-radius: 5px;
   padding: 5px;
   margin: 5px;
-  width: 100%; /* Ancho completo del contenedor */
+  width: 100%;
 }
-
-/* Estilos para los botones de filtrar y las demás etiquetas */

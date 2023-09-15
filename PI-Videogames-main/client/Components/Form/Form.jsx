@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { postVideogame, clean } from "../../Redux/actions";
+import { postVideogame, clean, getAllGenres } from "../../Redux/actions";
 import { validations } from "../../validations";
 import "./Form.css";
 
@@ -8,8 +8,11 @@ const Form = () => {
   const postResponse = useSelector((state) => state.postResponse);
   const errorResponse = useSelector((state) => state.errorResponse)
   const genres = useSelector((state) => state.allGenres)
+  const allVideogames = useSelector((state) => state.allVideogames)
+  
+  
   const dispatch = useDispatch();
-  console.log(postResponse);
+  
   const [errors, setErrors] = useState({});
   const [created, setCreated] = useState({
     name: "",
@@ -41,7 +44,11 @@ const Form = () => {
   })
   
   const [creating, setCreating] = useState(false)
-  console.log(focusedInput);
+  
+  useEffect(()=>{
+    dispatch(getAllGenres())
+  }, [])
+  
   const handleChange = (e) => {
     if (e.target.name === "genres") {
       if (created.genres.includes(e.target.value)) {
@@ -61,17 +68,32 @@ const Form = () => {
           genres: [...created.genres, e.target.value],
         })
       );
-    } else {
-      setCreated({
-        ...created,
-        [e.target.name]: e.target.value,
-      });
+    }
+    // if(e.target.name === 'name'){
+    //   console.log('entrando al if de name');
+    //   const gameFind = allVideogames.find((game)=> game.name === created.name)
+    //   if(gameFind){
+    //   window.alert("Este nombre ya existe");
+    //   // setErrors({
+    //   //   ...errors,
+        
+    //   // })
+    // }
+    // } 
+      else {
+        setCreated({
+          ...created,
+          [e.target.name]: e.target.value,
+        });
+        const gameFind = allVideogames.find((game)=> game.name === created.name)
+        console.log(gameFind);
       setErrors(
         validations({
           ...created,
           [e.target.name]: e.target.value,
-        })
+        }, gameFind)
       );
+      console.log(errors);
     }
   };
 
@@ -83,11 +105,10 @@ const Form = () => {
     });
     console.log(e.target.name);
   };
-
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     if (Object.entries(errors).length === 0) {
-
       dispatch(postVideogame(created))
     } else {
       setCreating(true);
@@ -120,6 +141,11 @@ const Form = () => {
     })
     setCreating(false)
   }
+  
+
+  const disableButton = !created.name || !created.background_image || created.genres.length === 0 || !created.description || !created.platforms || !created.rating || !created.released || Object.entries(errors).length !== 0
+
+  console.log(allVideogames);
   return (
     <div className="form-container">
 
@@ -150,6 +176,7 @@ const Form = () => {
         />
         {onBlurInput.name && focusedInput.name && errors.eName && <p className="error-text">{errors.eName}</p>}
         {onBlurInput.name && focusedInput.name && errors.eName2 && <p className="error-text">{errors.eName2}</p>}
+        {onBlurInput.name && focusedInput.name && errors.eName3 && <p className="error-text">{errors.eName3}</p>}
         <label>Descripción</label>
         <textarea
           placeholder="Ingresa la descripción de tu videojuego..."
@@ -203,10 +230,7 @@ const Form = () => {
         <select name="genres" onChange={handleChange}
           onFocus={handleInputFocus}
           onBlur={handleOnBlur}>
-          {genres && genres.map((gen)=>{
-                        console.log(gen.name);
-                        return <option value={gen.name}>{gen.name}</option>
-                    })}
+          {genres.map((gen)=><option value={gen.name}>{gen.name}</option>)}
         </select>
         <div className="container-genres">
           {created.genres &&
@@ -232,7 +256,8 @@ const Form = () => {
           className={focusedInput.background_image ? "neon-input" : ""}
         />
         {onBlurInput.background_image && focusedInput.background_image && errors.eImage && <p className="error-text">{errors.eImage}</p>}
-        <button type="submit" value="valor" className="neon-button">
+
+        <button type="submit" value="valor" className={disableButton ? "disable-button" : "neon-button"} disabled={disableButton}>
           Crear
         </button>
         

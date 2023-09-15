@@ -8,36 +8,34 @@ import Paginacion from '../Paginacion/Paginacion';
 
 
 const Home = () => {
-    const allVideogames = useSelector((state) => state.allVideogames) // me traigo los videojuegos que guardé en el estado global
+    const allVideogames = useSelector((state) => state.allVideogames) 
     const genres = useSelector((state) => state.allGenres)
     const name = useSelector((state) => state.nameSearched)
     const dispatch = useDispatch()
-    const [filtros, setFiltros] = useState({ // estado local para los filtros
+    const [filtros, setFiltros] = useState({ 
         rating: '',
         orden: '',
         generos: [],
         origen: '',
     })
-    const [juegosFiltradosState, setJuegosFiltradosState] = useState([]); // estado para guardar dinámicamente los juegos que se van filtrando con los diferentes select
-    const [isLoading, setIsLoading] = useState(true); // estado local para cuando todavía no hay cards
-    const [currentPage, setCurrentPage] = useState(1); // estado local para calcular el paginado
-    const gamesPerPage = 15;// cantidad de juegos que se muestran por página
+    const [juegosFiltradosState, setJuegosFiltradosState] = useState([]);
+    const [isLoading, setIsLoading] = useState(true); 
+    const [currentPage, setCurrentPage] = useState(1);
+    const gamesPerPage = 15;
 
-    const onPageChange = (pageNumber) => { // función que actualiza el número de página que se esta mostrando
+    const onPageChange = (pageNumber) => { 
         setCurrentPage(pageNumber);
     };
 
     const startIndex = (currentPage - 1) * gamesPerPage; 
     const endIndex = startIndex + gamesPerPage;
-
+    console.log(name);
     useEffect(() => {
         
         if(name){
             setIsLoading(true)
             dispatch(getByName(name))
             .then(() => setIsLoading(false))
-            
-            
         } else {
             setIsLoading(true);
             dispatch(getAllGames())
@@ -48,31 +46,36 @@ const Home = () => {
     }, [name]);
     
     useEffect(() => {
-
         let juegosFiltrados = [...allVideogames];
+
         
         if (filtros.orden === 'A') {
             
             juegosFiltrados = juegosFiltrados.sort((juegoA, juegoB) => juegoA.name.localeCompare(juegoB.name))
-            
+            setCurrentPage(1)
         }
         if (filtros.orden === 'D') {
             
             juegosFiltrados = juegosFiltrados.sort((juegoA, juegoB) => juegoB.name.localeCompare(juegoA.name));
+            setCurrentPage(1)
         }
         if (filtros.origen === 'Api') {
             juegosFiltrados = juegosFiltrados.filter((videojuego) => typeof videojuego.id === 'number')
+            setCurrentPage(1)
         }
         if (filtros.origen === 'Database') {
             juegosFiltrados = juegosFiltrados.filter((videojuego) => typeof videojuego.id !== 'number')
+            setCurrentPage(1)
         }
         if (filtros.rating === 'Ar') {
            
             juegosFiltrados = juegosFiltrados.sort((a, b) => a.rating - b.rating)
+            setCurrentPage(1)
         }
         if (filtros.rating === 'Dr') {
             
             juegosFiltrados = juegosFiltrados.sort((a, b) => b.rating - a.rating)
+            setCurrentPage(1)
         }
         if (filtros.generos.length) {
             
@@ -86,26 +89,23 @@ const Home = () => {
                 }
             }
             juegosFiltrados = juegosFiltradosPorGenero
+            setCurrentPage(1)
         }
         
         setJuegosFiltradosState(juegosFiltrados);
     }, [filtros, allVideogames])
-    
-    console.log(allVideogames);
 
     const handleChange = (e) => {
         if(e.target.name === 'rating'){
             setFiltros({
                 ...filtros,
-                orden: '',
                 rating: e.target.value
             })
         }
         if(e.target.name === 'orden'){
             setFiltros({
                 ...filtros,
-                orden: e.target.value,
-                rating: ''
+                orden: e.target.value
             })
         }
         if (e.target.name === 'generos') {
@@ -121,8 +121,6 @@ const Home = () => {
         }
     }
     const handleGeneros = (e) => {
-        
-        console.log(e.target.name);
         setFiltros({
             ...filtros,
             generos: filtros.generos.filter((gen) => gen !== e.target.name)
@@ -140,6 +138,8 @@ const Home = () => {
             [e.target.name]: ''
         })
     }
+    const comprobando = filtros.generos.length !== 0 || filtros.orden !== '' || filtros.origen !== '' || filtros.rating !== ''
+   
     const juegosPorPagina = juegosFiltradosState.slice(startIndex, endIndex);
     return (
         <div className="home-container">
@@ -160,7 +160,14 @@ const Home = () => {
                     <option value="D">Descendente</option>
 
                 </select>
-                <button onClick={handleFiltros} name='orden' className={`neon-button ${filtros.orden !== '' ? 'active' : ''}`}>Reset</button>
+                <button onClick={handleFiltros} name='orden' className={`filtros-neon-button ${filtros.orden !== '' ? 'active' : ''}`}>Resetear orden</button>
+                <p>Ordenar por rating</p>
+                <select name="rating" value={filtros.rating} onChange={handleChange}>
+                    <option value="">Seleccionar rating</option>
+                    <option value='Ar'>Ascendente</option>
+                    <option value='Dr'>Descendente</option>
+                </select>
+                <button onClick={handleFiltros} name='rating' className={`filtros-neon-button ${filtros.rating !== '' ? 'active' : ''}`}>Resetear orden</button>
                 <p>Filtrar por origen</p>
                 <select name="origen" value={filtros.origen} onChange={handleChange}>
 
@@ -168,19 +175,12 @@ const Home = () => {
                     <option value='Api'>Api</option>
                     <option value='Database'>Database</option>
                 </select>
-                <button onClick={handleFiltros} name='origen' className={`neon-button ${filtros.origen !== '' ? 'active' : ''}`}>Reset</button>
-                <p>Filtrar por rating</p>
-                <select name="rating" value={filtros.rating} onChange={handleChange}>
-                    <option value="">Seleccionar rating</option>
-                    <option value='Ar'>Ascendente</option>
-                    <option value='Dr'>Descendente</option>
-                </select>
-                <button onClick={handleFiltros} name='rating' className={`neon-button ${filtros.rating !== '' ? 'active' : ''}`}>Reset</button>
+                <button onClick={handleFiltros} name='origen' className={`filtros-neon-button ${filtros.origen !== '' ? 'active' : ''}`}>Resetear origen</button>
                 <p>Filtrar por género</p>
                 <select name="generos" onChange={handleChange}>
                     <option value="">Seleccionar género</option>
                     {genres && genres.map((gen)=>{
-                        console.log(gen.name);
+                        
                         return <option value={gen.name}>{gen.name}</option>
                     })}
                 </select>
@@ -196,7 +196,7 @@ const Home = () => {
                             </div>
                         ))}
                 </div>
-                        <button onClick={handleFiltros} name='generos' className={`neon-button ${filtros.generos.length !== 0 ? 'active' : ''}`}>Reset</button>
+                        <button onClick={handleFiltros} name='generos' className={`filtros-neon-button ${filtros.generos.length !== 0 ? 'active' : ''}`}>Resetear géneros</button>
 
             </div>
             <Paginacion
@@ -204,6 +204,12 @@ const Home = () => {
                 totalPages={Math.ceil(juegosFiltradosState.length / gamesPerPage)}
                 onPageChange={onPageChange}
             />
+    {juegosFiltradosState.length === 0 && comprobando &&(
+      <div className="error-container">
+        <h1 className="error-message">JUEGO NO ENCONTRADO!!</h1>
+        <img className="error-mario" src="https://www.egames.news/__export/1600098643488/sites/debate/img/2020/09/14/mario-head-removebg-preview_crop1600098532376.png_242310155.png" alt="mario" />
+      </div>
+    )}
             {allVideogames.length === 0 && !isLoading && (
   <div className="error-container">
     <h1 className="error-message">JUEGO NO ENCONTRADO!!</h1>

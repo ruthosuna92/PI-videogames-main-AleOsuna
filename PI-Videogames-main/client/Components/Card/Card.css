@@ -1,5 +1,3 @@
-/* Card.css */
-
 .card {
   width: 300px;
   height: 300px;
@@ -8,19 +6,19 @@
   display: inline-block;
   vertical-align: top;
   box-sizing: border-box;
-  /* overflow: hidden; */
-  border-radius: 50%; /* Hacer la tarjeta completamente redonda */
-  transition: border-radius 0.3s, box-shadow 0.3s; /* Agrega una transición para las esquinas y el efecto de relieve */
+  overflow-y: auto;
+  border-radius: 50%;
+  transition: border-radius 0.3s, box-shadow 0.3s; 
   position: relative;
   background-color: rgba(0, 0, 0, 0.7);
   color: white;
   text-align: center;
-  box-shadow: 0 0 10px rgba(255, 0, 102, 0.7); /* Efecto de relieve alrededor de la tarjeta (neon) */
+  box-shadow: 0 0 10px rgba(255, 0, 102, 0.7); 
 }
 
 .card:hover {
-  border-radius: 10px; /* Ajusta las esquinas ligeramente redondeadas al hacer hover */
-  box-shadow: 0 0 20px rgba(255, 0, 102, 0.7), 0 0 30px rgba(255, 0, 102, 0.7), 0 0 40px rgba(255, 0, 102, 0.7); /* Efecto de relieve más pronunciado (neon) al hacer hover */
+  border-radius: 10px; 
+  box-shadow: 0 0 20px rgba(255, 0, 102, 0.7), 0 0 30px rgba(255, 0, 102, 0.7), 0 0 40px rgba(255, 0, 102, 0.7); 
 }
 
 .card-inner {
@@ -56,6 +54,6 @@
   font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 .text-neon {
-  color: #FF00FF; /* Color del texto en fucsia */
-  text-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF, 0 0 30px #FF00FF; /* Efecto de neón con sombras en fucsia */
+  color: #FF00FF; 
+  text-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF, 0 0 30px #FF00FF;
 }

@@ -19,7 +19,6 @@ const SearchBar = () => {
             name: e.target.value
         });
     };
-
     const handleClick = (e) => {
         dispatch(nameSearched(busqueda.name));
         setBusqueda({
@@ -28,6 +27,7 @@ const SearchBar = () => {
         if(location !== '/home') navigate('/home')
     };
 
+console.log(busqueda.name);
     return (
         <div className="search-bar-container">
             <input
