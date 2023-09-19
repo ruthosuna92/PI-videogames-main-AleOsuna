@@ -44,23 +44,13 @@ module.exports = async (id, name, background_image, genres, description, platfor
         description: gameUpdated.description, 
         rating: gameUpdated.rating, 
         genres: gameUpdated.genres.map((gen)=>gen.name),
-        released: gameUpdated.released
+        released: gameUpdated.released,
+        putResponse: 'Juego actualizado con éxito'
     };
   } catch (error) {
     throw error; 
   }
 };
-
-    
-    // const videogame = await Videogame.create({ name, background_image, description, platforms, rating, released } );
-    // console.log(videogame);
-
-    // const newVideogame = await Promise.all(genres.map(async (gen) => {
-    //     const idGenre = await Genre.findOne({ where: { name: gen } })
-    //     const vg = await videogame.addGenre(idGenre)
-    //     return vg
-    // }))
-    // return 'Videojuego creado exitosamente'
 
 
 
