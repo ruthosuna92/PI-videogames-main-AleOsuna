@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { postVideogame, clean, getAllGenres } from "../../Redux/actions";
+import { postVideogame, clean, getAllGenres, putVideogame, mountComp, unmountComp } from "../../Redux/actions";
 import { validations } from "../../validations";
 import "./Form.css";
 
@@ -9,9 +9,14 @@ const Form = () => {
   const errorResponse = useSelector((state) => state.errorResponse)
   const genres = useSelector((state) => state.allGenres)
   const allVideogames = useSelector((state) => state.allVideogames)
+  const videogameDetail = useSelector((state)=> state.videogameDetail)
+  const mountOrUnmount = useSelector((state) => state.mountOrUnmount)
+  console.log(videogameDetail);
   
   
   const dispatch = useDispatch();
+  const edit = Object.entries(videogameDetail).length !== 0
+  
   
   const [errors, setErrors] = useState({});
   const [created, setCreated] = useState({
@@ -47,6 +52,17 @@ const Form = () => {
   
   useEffect(()=>{
     dispatch(getAllGenres())
+    if(Object.entries(videogameDetail).length !== 0){
+      setCreated({
+        name: videogameDetail.name,
+    background_image: videogameDetail.background_image,
+    genres: videogameDetail.genres,
+    description: videogameDetail.description,
+    platforms: videogameDetail.platforms,
+    rating: videogameDetail.rating,
+    released: videogameDetail.released,
+      })
+    }
   }, [])
   
   const handleChange = (e) => {
@@ -69,29 +85,29 @@ const Form = () => {
         })
       );
     }
-    // if(e.target.name === 'name'){
-    //   console.log('entrando al if de name');
-    //   const gameFind = allVideogames.find((game)=> game.name === created.name)
-    //   if(gameFind){
-    //   window.alert("Este nombre ya existe");
-    //   // setErrors({
-    //   //   ...errors,
-        
-    //   // })
-    // }
-    // } 
       else {
         setCreated({
           ...created,
           [e.target.name]: e.target.value,
         });
-        const gameFind = allVideogames.find((game)=> game.name === created.name)
-        console.log(gameFind);
+        const gameFind = () => {
+          let game = {}
+          if(edit){
+            let gamesCopy = [...allVideogames].filter((g)=> g.name !== videogameDetail.name)
+            game = gamesCopy.find((game)=> game.name === created.name)
+            return game
+
+          } else {
+            game = allVideogames.find((game)=> game.name === created.name)
+            return game
+          }
+        }
+      
       setErrors(
         validations({
           ...created,
           [e.target.name]: e.target.value,
-        }, gameFind)
+        }, gameFind())
       );
       console.log(errors);
     }
@@ -109,7 +125,17 @@ const Form = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (Object.entries(errors).length === 0) {
-      dispatch(postVideogame(created))
+      if(edit){
+        let update = {
+          ...created,
+          id: videogameDetail.id
+        }
+        dispatch(putVideogame(update))
+        
+
+      } else {
+        dispatch(postVideogame(created))
+      }
     } else {
       setCreating(true);
     }
@@ -140,12 +166,18 @@ const Form = () => {
       released: "",
     })
     setCreating(false)
+    dispatch(unmountComp())
+  }
+  
+  const handleEdit = (e) => {
+    e.preventDefault()
+    dispatch(unmountComp())
   }
   
 
   const disableButton = !created.name || !created.background_image || created.genres.length === 0 || !created.description || !created.platforms || !created.rating || !created.released || Object.entries(errors).length !== 0
 
-  console.log(allVideogames);
+  
   return (
     <div className="form-container">
 
@@ -257,8 +289,10 @@ const Form = () => {
         />
         {onBlurInput.background_image && focusedInput.background_image && errors.eImage && <p className="error-text">{errors.eImage}</p>}
 
+        {mountOrUnmount && <button className='neon-button' onClick={handleEdit}> Cancelar </button>}
+
         <button type="submit" value="valor" className={disableButton ? "disable-button" : "neon-button"} disabled={disableButton}>
-          Crear
+          {edit ? 'Actualizar' : 'Crear'}
         </button>
         
       </form>

@@ -29,7 +29,6 @@ const Home = () => {
 
     const startIndex = (currentPage - 1) * gamesPerPage; 
     const endIndex = startIndex + gamesPerPage;
-    console.log(name);
     useEffect(() => {
         
         if(name){

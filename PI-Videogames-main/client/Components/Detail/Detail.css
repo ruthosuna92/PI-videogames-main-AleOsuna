@@ -3,14 +3,86 @@
     border-radius: 10px;
     display: flex;
     width: 70%; 
-    margin: 80px auto 0;
+    margin: 80px auto 150px;
     padding: 10px; 
-    
+  }
+  .detail-container-sonic {
+    /* background-color: rgba(0, 0, 0, 0.8); */
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    width: 50%;
+    margin: 80px auto 150px;
+    padding: 10px;
+    text-align: center; 
+  }
+  
+  .detail-container-sonic img {
+    max-width: 100%;
+    border-radius: 10px; 
+  }
+  .detail-container-blurred {
+    filter: blur(5px); 
+    transition: filter 0.3s;
+  }
+  
+  h1 {
+    color: white;
+  }
+  h2 {
+    color: white;
+    max-width: 100%;
+  }
+  .icons-container {
+    margin-left: 300px;
+  }
+  .icons {
+    width: 40px;
+  }
+  .icon-button {
+    background-color: transparent;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s, text-shadow 0.3s;
+    outline: none;
+  }
+  .icon-button:hover {
+    background-color: #FF00FF;
+    color: #FFFFFF;
+    box-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF, 0 0 30px #FF00FF; 
+    text-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF, 0 0 30px #FF00FF;
+  }
+  .ventana-delete {
+    /* background-color: rgba(0, 0, 0, 0.95); */
+    /* background-color: #3C3C3C; */
+    background-color: black;
+      color: white;
+      padding: 20px;
+      width: 250px;
+      height: 150px;
+      border-radius: 50px; 
+      margin: 0 auto; 
+      margin-top: 100px;
+      display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    border: 2px solid #FF00FF; 
+    color: #FF00FF; 
+    box-shadow: 0 0 10px #FF00FF, 0 0 20px #FF00FF, 0 0 30px #FF00FF;
+    z-index: 1000;
+    transform: translate(-50%, -50%);
+    top: 20%;
+    left: 50%;
   }
   
   .detail-image {
     flex: 1; 
     padding: 20px;
+    max-width: 100%;
+    border-radius: 50px;
   }
   
   .detail-info {
@@ -24,15 +96,6 @@
     border-radius: 10px;
   }
   
-  .detail-container {
-    background-color: rgba(0, 0, 0, 0.8);
-    border-radius: 80px;
-    display: flex;
-    width: 80%;
-    margin: 60px auto 0;
-    padding: 10px;
-  }
-  
   .detail-left {
     flex: 1;
     padding: 30px;
@@ -40,14 +103,18 @@
     
   }
   
-  .detail-image {
-    max-width: 100%;
-    border-radius: 50px;
-  }
-  
   .detail-right {
     flex: 1;
     padding: 30px;
     color: white;
   }
+.sonic-container {
+  display: flex;
+    width: 70%; 
+    padding: 10px; 
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+}
+
   

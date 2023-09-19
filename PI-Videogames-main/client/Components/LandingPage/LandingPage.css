@@ -24,11 +24,15 @@ body::before {
     position: relative; 
   }
   
-.container {
+  .container {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    flex-direction: column;
+}
+.mario-bailando {
+    width: 200px;
 }
 .button-neon {
     background-color: transparent;

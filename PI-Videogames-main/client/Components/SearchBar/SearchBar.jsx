@@ -27,7 +27,7 @@ const SearchBar = () => {
         if(location !== '/home') navigate('/home')
     };
 
-console.log(busqueda.name);
+
     return (
         <div className="search-bar-container">
             <input
